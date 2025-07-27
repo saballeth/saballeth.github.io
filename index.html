@@ -28,11 +28,6 @@
             overflow-x: hidden;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
@@ -142,18 +137,61 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: transform 0.3s, box-shadow 0.3s;
-            opacity: 0;
-            transform: translateY(30px);
         }
         
-        .section-card.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .institutional-info {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-left: 5px solid var(--secondary);
         }
         
-        .section-card:hover {
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            min-width: 80px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .countdown-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .countdown-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+        
+        .countdown-ended {
+            background: var(--accent);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .countdown-ended i {
+            font-size: 1.5rem;
         }
         
         ul {
@@ -220,33 +258,6 @@
             transform: translateX(100%);
         }
         
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        
-        .countdown-item {
-            background: var(--primary);
-            color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            min-width: 80px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        
-        .countdown-number {
-            font-size: 2rem;
-            font-weight: 700;
-        }
-        
-        .countdown-label {
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
-        
         footer {
             background: linear-gradient(135deg, var(--primary), #1a252f);
             color: white;
@@ -290,17 +301,15 @@
             z-index: 100;
             cursor: pointer;
             transition: all 0.3s;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        
-        .floating-btn.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
         
         .floating-btn:hover {
             transform: translateY(-5px) scale(1.1);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         @media (max-width: 768px) {
@@ -319,10 +328,6 @@
             .section-card {
                 padding: 1.5rem;
             }
-            
-            .countdown {
-                flex-wrap: wrap;
-            }
         }
     </style>
 </head>
@@ -340,16 +345,19 @@
             <p>Únete al semillero líder en desarrollo tecnológico e innovación</p>
         </section>
         
+        <section class="section-card institutional-info">
+            <h2><i class="fas fa-university"></i> Contexto Institucional</h2>
+            <p>La Vicerrectoría de Investigación de la Universidad del Magdalena, adscrita a la Rectoría, coordina y promueve la investigación en la institución. Los semilleros de investigación son grupos de estudiantes que se vinculan a grupos de investigación reconocidos para iniciar su formación en investigación y apoyar el desarrollo de las actividades del grupo.</p>
+            <p>El semillero GIDSYC está reconocido oficialmente por la universidad como parte de su estrategia para fomentar la cultura investigativa entre los estudiantes de pregrado y posgrado.</p>
+        </section>
+        
         <section class="section-card" id="benefits">
             <h2><i class="fas fa-star"></i> Beneficios Exclusivos</h2>
             <ul>
-                <li><span class="highlight">Formación investigativa:</span> Domina metodologías de investigación con expertos.</li>
-                <li><span class="highlight">Proyectos innovadores:</span> Trabaja en soluciones tecnológicas con impacto real.</li>
+                <li><span class="highlight">Formación investigativa:</span> Domina metodologías de investigación.</li>
+                <li><span class="highlight">Proyectos innovadores:</span> Trabaja en soluciones tecnológicas.</li>
                 <li><span class="highlight">Publicaciones científicas:</span> Recibe mentoría para publicar en revistas indexadas.</li>
-                <li><span class="highlight">Red profesional:</span> Conecta con investigadores y empresas del sector.</li>
-                <li><span class="highlight">Certificación:</span> Acredita tu participación con reconocimiento institucional.</li>
                 <li><span class="highlight">Competencias:</span> Participa en eventos y concursos nacionales/internacionales.</li>
-                <li><span class="highlight">Recursos avanzados:</span> Acceso a laboratorios, software especializado y bases de datos.</li>
                 <li><span class="highlight">Becas:</span> Oportunidades para pasantías y movilidad académica.</li>
             </ul>
             
@@ -378,8 +386,6 @@
             <ul>
                 <li>Estar matriculado en programas de ingeniería, tecnología o ciencias computacionales.</li>
                 <li>Disponibilidad de 8 horas semanales para actividades del semillero.</li>
-                <li>Promedio académico mínimo de 3.8/5.0 (excepciones para talento destacado).</li>
-                <li>Compromiso mínimo de 12 meses con el programa.</li>
                 <li>Presentar carta de motivación y propuesta de interés investigativo.</li>
             </ul>
         </section>
@@ -388,13 +394,10 @@
             <h2><i class="fas fa-rocket"></i> Proceso de Selección</h2>
             <ol style="list-style-type: decimal; padding-left: 2rem;">
                 <li>Inscripción en línea (formulario digital)</li>
-                <li>Evaluación de hoja de vida y rendimiento académico</li>
-                <li>Entrevista con el comité evaluador</li>
-                <li>Prueba técnica (según área de interés)</li>
-                <li>Publicación de resultados</li>
+                <li>Publicación de resultados mediante contacto directo</li>
             </ol>
             
-            <p style="margin-top: 1.5rem; font-size: 1.2rem;">Fecha límite de inscripción: <span class="highlight" id="deadline">15 de noviembre de 2023</span></p>
+            <p style="margin-top: 1.5rem; font-size: 1.2rem;">Fecha límite de inscripción: <span class="highlight" id="deadline">30 de agosto de 2025</span></p>
             
             <button class="btn" id="applyBtn">¡Quiero Aplicar! <i class="fas fa-arrow-right"></i></button>
         </section>
@@ -404,8 +407,8 @@
         <div class="container">
             <h3 style="margin-bottom: 1rem;">Contáctanos</h3>
             <p>Semillero GIDSYC - Facultad de Ingeniería</p>
-            <p>Universidad XYZ</p>
-            <p>Tel: +57 123 456 7890 | Email: gidsyc@universidad.edu.co</p>
+            <p>Universidad del Magdalena</p>
+            <p>WhatsApp: +57 3008099170 | Outlook: csaballeth@unimagdalena.edu.co</p>
             
             <div class="social-links">
                 <a href="#"><i class="fab fa-facebook"></i></a>
@@ -415,7 +418,7 @@
                 <a href="#"><i class="fab fa-youtube"></i></a>
             </div>
             
-            <p style="margin-top: 1.5rem; opacity: 0.8; font-size: 0.9rem;">© 2023 Semillero GIDSYC. Todos los derechos reservados.</p>
+            <p style="margin-top: 1.5rem; opacity: 0.8; font-size: 0.9rem;">© 2025 Semillero GIDSYC. Todos los derechos reservados.</p>
         </div>
     </footer>
     
@@ -424,124 +427,71 @@
     </div>
     
     <script>
-        // Animación de aparición de secciones al hacer scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.section-card');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-            
-            // Mostrar botón flotante después de desplazarse
-            const floatingBtn = document.getElementById('floatingBtn');
-            
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 300) {
-                    floatingBtn.classList.add('visible');
-                } else {
-                    floatingBtn.classList.remove('visible');
-                }
-            });
-            
-            // Contador regresivo
+        // Contador regresivo
+        function initCountdown() {
+            // Fecha límite: 15 de noviembre 2023 a las 23:59:59
             const deadline = new Date('November 15, 2023 23:59:59').getTime();
             
-            function updateCountdown() {
+            const countdownTimer = setInterval(function() {
                 const now = new Date().getTime();
                 const distance = deadline - now;
                 
+                // Cálculos de tiempo
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
                 
+                // Mostrar resultados
                 document.getElementById('days').textContent = days.toString().padStart(2, '0');
                 document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
                 document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
                 document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
                 
+                // Si el tiempo ha terminado
                 if (distance < 0) {
                     clearInterval(countdownTimer);
-                    document.getElementById('countdown').innerHTML = '<div style="color: var(--accent); font-weight: bold;">¡La convocatoria ha cerrado!</div>';
+                    document.getElementById('countdown').innerHTML = `
+                        <div class="countdown-ended">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span>¡La convocatoria ha cerrado!</span>
+                        </div>
+                    `;
                 }
-            }
+            }, 1000);
+        }
+        
+        // Botón flotante
+        function initFloatingButton() {
+            const floatingBtn = document.getElementById('floatingBtn');
             
-            updateCountdown();
-            const countdownTimer = setInterval(updateCountdown, 1000);
-            
-            // Efecto hover mejorado para tarjetas
-            sections.forEach(section => {
-                section.addEventListener('mouseenter', function() {
-                    const icon = this.querySelector('h2 i');
-                    if (icon) {
-                        icon.style.transform = 'rotate(10deg) scale(1.1)';
-                        icon.style.color = 'var(--accent)';
-                    }
-                });
-                
-                section.addEventListener('mouseleave', function() {
-                    const icon = this.querySelector('h2 i');
-                    if (icon) {
-                        icon.style.transform = '';
-                        icon.style.color = '';
-                    }
-                });
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    floatingBtn.style.display = 'flex';
+                } else {
+                    floatingBtn.style.display = 'none';
+                }
             });
             
-            // Botón de aplicación
-            const applyBtn = document.getElementById('applyBtn');
-            const floatingApplyBtn = document.getElementById('floatingBtn');
-            
-            function applyAction() {
-                // Aquí iría la lógica para abrir el formulario
-                alert('¡Gracias por tu interés! Serás redirigido al formulario de aplicación.');
-                // window.location.href = '#formulario';
-            }
-            
-            applyBtn.addEventListener('click', applyAction);
-            floatingApplyBtn.addEventListener('click', applyAction);
-            
-            // Efecto de partículas para el encabezado (opcional)
-            function createParticle() {
-                const particle = document.createElement('div');
-                particle.style.position = 'absolute';
-                particle.style.width = Math.random() * 5 + 2 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.backgroundColor = 'rgba(255,255,255,' + (Math.random() * 0.3 + 0.1) + ')';
-                particle.style.borderRadius = '50%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.pointerEvents = 'none';
-                document.querySelector('header').appendChild(particle);
-                
-                const animation = particle.animate([
-                    { transform: 'translateY(0) translateX(0)', opacity: 1 },
-                    { transform: 'translateY(' + (Math.random() * 100 - 50) + 'px) translateX(' + (Math.random() * 100 - 50) + 'px)', opacity: 0 }
-                ], {
-                    duration: Math.random() * 3000 + 2000,
-                    easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
-                });
-                
-                animation.onfinish = () => {
-                    particle.remove();
-                    createParticle();
-                };
-            }
-            
-            // Crear múltiples partículas
-            for (let i = 0; i < 15; i++) {
-                createParticle();
-            }
+            floatingBtn.addEventListener('click', function() {
+                document.getElementById('applyBtn').click();
+            });
+        }
+        
+        // Botón de aplicación
+        function initApplyButton() {
+            document.getElementById('applyBtn').addEventListener('click', function() {
+                alert('Serás redirigido al formulario de inscripción');
+                // Aquí iría la redirección real:
+                // window.location.href = "formulario.html";
+            });
+        }
+        
+        // Inicializar todo cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            initCountdown();
+            initFloatingButton();
+            initApplyButton();
         });
     </script>
 </body>
