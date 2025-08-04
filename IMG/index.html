@@ -311,33 +311,9 @@
                 padding: 1.5rem;
             }
         }
-    
-        .sidebar-slider {
-    position: fixed;
-    top: 100px;
-    width: 120px;
-    height: 240px;
-    z-index: 50;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    padding: 10px;
-    transition: opacity 1s ease-in-out;
-}
-
-
-
     </style>
-
-    
 </head>
 <body>
-
-    
 
     <header>
         <div class="container">
@@ -352,7 +328,6 @@
             <h2>¡Transforma tu potencial en logros investigativos!</h2>
             <p>Únete al semillero líder en desarrollo tecnológico e innovación</p>
         </section>
-
         
         <section class="section-card institutional-info">
             <h2><i class="fas fa-university"></i> Contexto Institucional</h2>
@@ -372,19 +347,19 @@
             
             <div class="countdown" id="countdown">
                 <div class="countdown-item">
-                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-number" id="days">11</div>
                     <div class="countdown-label">Días</div>
                 </div>
                 <div class="countdown-item">
-                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-number" id="hours">10</div>
                     <div class="countdown-label">Horas</div>
                 </div>
                 <div class="countdown-item">
-                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-number" id="minutes">09</div>
                     <div class="countdown-label">Minutos</div>
                 </div>
                 <div class="countdown-item">
-                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-number" id="seconds">60</div>
                     <div class="countdown-label">Segundos</div>
                 </div>
             </div>
@@ -395,9 +370,9 @@
         <p>El semillero GIDSYC promueve la participación activa de sus integrantes en espacios académicos de alto nivel, orientados a la divulgación científica, el intercambio de conocimiento y el desarrollo de soluciones con impacto social y tecnológico.</p>
     
         <ul>
-            <li><span class="highlight">Ponencias:</span> <a href="https://drive.google.com/drive/folders/18ASb0uN8hsLqg17VfWwtqH7-JAZKowfu?usp=sharing" target="_blank" rel="noopener">Participación en congresos, simposios y seminarios nacionales</a> </li>
-            <li><span class="highlight">Proyectos de Investigación:</span> <a href="https://universidadmag-my.sharepoint.com/:f:/g/personal/csaballeth_unimagdalena_edu_co/EmFErql3LHlDhXZ0SESWkVQBTfDtq0WrVeQWWFSjwtGzqw?e=phfIZe" target="_blank" rel="noopener">Formulación, ejecución y seguimiento de investigaciones aplicadas en ciencia y tecnología. </a></li>
-            <li><span class="highlight">Artículos Científicos:</span> <a href= "https://drive.google.com/drive/folders/1hm0cR8j-Xu_AHQjkNxWXn63BqFz1udpn?usp=sharing" target="_blank" rel="noopener">Redacción y publicación de papers en revistas indexadas con el acompañamiento del grupo de investigación GIDSYC.> </a></li>
+            <li><span class="highlight">Ponencias:</span> Participación en congresos, simposios y seminarios nacionales e internacionales.</li>
+            <li><span class="highlight">Proyectos de Investigación:</span> Formulación, ejecución y seguimiento de investigaciones aplicadas en ciencia y tecnología.</li>
+            <li><span class="highlight">Artículos Científicos:</span> Redacción y publicación de manuscritos en revistas indexadas con el acompañamiento del grupo de investigación GIDSYC.</li>
         </ul>
 
         <p style="margin-top: 1.5rem;">Estas actividades permiten fortalecer las competencias investigativas de los estudiantes y contribuyen a la visibilidad científica institucional.</p>
@@ -428,7 +403,16 @@
     
 
     </div>
+        <div class="sidebar-slider left">
+    <img src="img1.jpg" class="slide active">
+    <img src="img2.jpg" class="slide">
+    <img src="img3.jpg" class="slide">
+</div>
 
+<div class="sidebar-slider right">
+    <video src="video1.mp4" class="slide" autoplay muted loop></video>
+    <img src="img4.jpg" class="slide">
+</div>
 
     <footer>
         <div class="container">
@@ -479,27 +463,6 @@
             }, 1000);
         }
         
-
-        function initSidebarSliders() {
-    document.querySelectorAll('.sidebar-slider').forEach(slider => {
-        const slides = slider.querySelectorAll('.slide');
-        let index = 0;
-
-        setInterval(() => {
-            slides[index].classList.remove('active');
-            index = (index + 1) % slides.length;
-            slides[index].classList.add('active');
-        }, 4000); // Cambia cada 4 segundos
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    initCountdown();
-    initFloatingButton();
-    initApplyButton();
-    initSidebarSliders(); // <--- activa los sliders laterales
-});
-
         // Botón flotante
         function initFloatingButton() {
             const floatingBtn = document.getElementById('floatingBtn');
@@ -532,30 +495,6 @@ document.addEventListener('DOMContentLoaded', function() {
             initFloatingButton();
             initApplyButton();
         });
-
-
-        const izquierdaImgs = ["IMG/Editar señales.png", "IMG/Editar señales.png"];
-  const derechaImgs = ["IMG/Editar señales.png", "IMG/Editar señales.png"];
-
-  function rotarImagenes(clase, imagenes) {
-    const contenedor = document.querySelector(`.lateral.${clase}`);
-    let index = 0;
-
-    setInterval(() => {
-      contenedor.querySelectorAll('img').forEach((img, i) => {
-        img.style.opacity = 0;
-        setTimeout(() => {
-          index = (index + 1) % imagenes.length;
-          img.src = imagenes[index];
-          img.style.opacity = 1;
-        }, 1000); // tiempo de desvanecimiento
-      });
-    }, 4000); // tiempo entre cambios
-  }
-
-  rotarImagenes("izquierda", izquierdaImgs);
-  rotarImagenes("derecha", derechaImgs);
-
     </script>
 </body>
 
