@@ -398,8 +398,8 @@
     </p>
 
         <div class="academic-btn-container">
-        <a href="saballeth.github.io/Proyectos y ponencias" class="btn-academic">
-            Ver Producción Académica
+        <a href="https://saballeth.github.io/Proyectos%20y%20ponencias" class="btn-academic">
+            Producción Académica
             <i class="fas fa-arrow-right"></i>
         </a>
     </div>
@@ -536,29 +536,6 @@ document.addEventListener('DOMContentLoaded', function() {
             initFloatingButton();
             initApplyButton();
         });
-
-
-        const izquierdaImgs = ["IMG/Editar señales.png", "IMG/Editar señales.png"];
-  const derechaImgs = ["IMG/Editar señales.png", "IMG/Editar señales.png"];
-
-  function rotarImagenes(clase, imagenes) {
-    const contenedor = document.querySelector(`.lateral.${clase}`);
-    let index = 0;
-
-    setInterval(() => {
-      contenedor.querySelectorAll('img').forEach((img, i) => {
-        img.style.opacity = 0;
-        setTimeout(() => {
-          index = (index + 1) % imagenes.length;
-          img.src = imagenes[index];
-          img.style.opacity = 1;
-        }, 1000); // tiempo de desvanecimiento
-      });
-    }, 4000); // tiempo entre cambios
-  }
-
-  rotarImagenes("izquierda", izquierdaImgs);
-  rotarImagenes("derecha", derechaImgs);
 
     </script>
 </body>
