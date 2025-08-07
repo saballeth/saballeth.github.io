@@ -1,562 +1,583 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convocatoria Semillero GIDSYC</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Semillero de Investigación GIDSYC | Universidad del Magdalena</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
+            --color-primario: #0056b3; /* Azul institucional */
+            --color-secundario: #ffc107; /* Amarillo complementario */
+            --color-texto: #333;
+            --color-fondo: #f8f9fa;
+            --color-borde: #dee2e6;
         }
-        
-        * {
+
+        /* Estructura principal */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.7;
-            color: var(--dark);
-            background-color: #f9f9f9;
-            overflow-x: hidden;
-        }
-        
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 Q50,80 0,100 Z"></path></svg>');
-            background-size: cover;
-            background-position: bottom;
-            opacity: 0.5;
-        }
-        
-        .container {
-            width: 85%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-        
-        h2 {
-            color: var(--primary);
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--secondary);
-            border-radius: 3px;
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, var(--secondary), #2980b9);
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-            margin: 2rem 0;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(41, 128, 185, 0.2);
-            position: relative;
-            overflow: hidden;
-            animation: fadeIn 1s ease-out;
-        }
-        
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            transform: rotate(30deg);
-        }
-        
-        .hero h2 {
-            color: white;
-            font-size: 2.2rem;
-        }
-        
-        .hero h2::after {
-            background: white;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .section-card {
-            background: white;
-            padding: 2.5rem;
-            margin: 2rem 0;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .institutional-info {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-left: 5px solid var(--secondary);
-        }
-        
-        .countdown {
             display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
+            min-height: 100vh;
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
         }
-        
-        .countdown-item {
-            background: var(--primary);
-            color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            min-width: 80px;
+
+        /* Barra lateral */
+        .sidebar {
+            width: 280px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            padding: 1.5rem;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            border-bottom: 1px solid var(--color-borde);
+            background-color: var(--color-primario);
         }
-        
-        .countdown-item:hover {
+
+        .logo {
+            max-width: 180px;
+            height: auto;
+        }
+
+        .nav-menu {
+            padding: 1.5rem 0;
+        }
+
+        .nav-category {
+            color: #6c757d;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.8rem 1.5rem 0.3rem;
+            font-weight: 600;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            color: var(--color-texto);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            font-size: 0.95rem;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: rgba(0, 86, 179, 0.05);
+            border-left: 4px solid var(--color-primario);
+            color: var(--color-primario);
+        }
+
+        .nav-icon {
+            margin-right: 12px;
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        /* Contenido principal */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 2rem 3rem;
+        }
+
+        /* Componentes */
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            border: 1px solid var(--color-borde);
+            padding: 1.5rem;
+        }
+
+        /* Estilo para íconos en títulos */
+        .title-icon {
+            color: var(--color-primario);
+            margin-right: 10px;
+            vertical-align: middle;
+            font-size: 1em;
+        }
+
+        .icon-feature {
+            font-size: 1.8rem;
+            color: var(--color-primario);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .feature-box {
+            display: flex;
+            align-items: center; /* alinea verticalmente el ícono con el texto */
+            gap: 1rem; /* espacio entre ícono y texto, mejor que margin-right manual */
+            margin-bottom: 1.5rem;
+        }
+
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 1.2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid var(--color-secundario);
+        }
+
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .project-card {
+            border: 1px solid var(--color-borde);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
             transform: translateY(-5px);
         }
-        
-        .countdown-number {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        
-        .countdown-label {
-            font-size: 0.8rem;
-            opacity: 0.8;
-            text-transform: uppercase;
-        }
-        
-        .countdown-ended {
-            background: var(--accent);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: bold;
-        }
-        
-        .countdown-ended i {
-            font-size: 1.5rem;
-        }
-        
-        ul {
-            list-style: none;
-        }
-        
-        ul li {
-            margin-bottom: 1rem;
-            padding-left: 2rem;
-            position: relative;
-        }
-        
-        ul li::before {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: var(--secondary);
-        }
-        
-        .highlight {
-            font-weight: 600;
-            color: var(--accent);
-        }
-        
-        .btn {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            margin-top: 1.5rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-            position: relative;
-            overflow: hidden;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
-            background: #c0392b;
-        }
-        
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+
+        .project-card img {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.4s;
+            height: 180px;
+            object-fit: cover;
         }
-        
-        .btn:hover::after {
-            transform: translateX(100%);
-        }
-        
-        footer {
-            background: linear-gradient(135deg, var(--primary), #1a252f);
+
+                .button {
+            display: inline-block;
+            padding: 0.6em 1.2em;
+            background-color: #007BFF;
             color: white;
-            text-align: center;
-            padding: 3rem 0;
-            margin-top: 4rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 1rem;
         }
-                
-        .floating-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--accent);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.4);
-            z-index: 100;
-            cursor: pointer;
-            transition: all 0.3s;
+
+        .button:hover {
+            background-color: #0056b3;
         }
-        
-        .floating-btn:hover {
-            transform: translateY(-5px) scale(1.1);
+
+
+        .project-info {
+            padding: 1.2rem;
         }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
             }
             
-            h2 {
-                font-size: 1.5rem;
-            }
-            
-            .container {
-                width: 95%;
-            }
-            
-            .section-card {
+            .main-content {
+                margin-left: 0;
                 padding: 1.5rem;
             }
         }
-    
-        .sidebar-slider {
-    position: fixed;
-    top: 100px;
-    width: 120px;
-    height: 240px;
-    z-index: 50;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    padding: 10px;
-    transition: opacity 1s ease-in-out;
-}
 
-
-
+        @media (max-width: 768px) {
+            .team-grid, .project-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
     </style>
-
-    
 </head>
 <body>
-
-    
-
-    <header>
-        <div class="container">
-            <h1>Convocatoria Semillero GIDSYC</h1>
-            <p>Grupo de Investigación y Desarrollo en Sistemas Computacionales</p>
+    <!-- Barra lateral de navegación -->
+    <div class="sidebar">
+        <div class="logo-container">
+            <img src="IMG/logo-semillero.png" alt="Logo Semillero GIDSYC" class="logo">
         </div>
-    </header>
-    
-    
-    <div class="container">
-        <section class="hero">
-            <h2>¡Transforma tu potencial en logros investigativos!</h2>
-            <p>Únete al semillero líder en desarrollo tecnológico e innovación</p>
+        
+        <div class="nav-menu">
+            <div class="nav-category">Navegación Principal</div>
+            <a href="#inicio" class="nav-item active">
+                <i class="fas fa-home nav-icon"></i>
+                <span>Inicio</span>
+            </a>
+            <a href="#objetivos" class="nav-item">
+                <i class="fas fa-bullseye nav-icon"></i>
+                <span>Objetivos</span>
+            </a>
+            <a href="#lineas" class="nav-item">
+                <i class="fas fa-project-diagram nav-icon"></i>
+                <span>Líneas de Investigación</span>
+            </a>
+            
+            <div class="nav-category">Equipo</div>
+            <a href="#coordinadores" class="nav-item">
+                <i class="fas fa-chalkboard-teacher nav-icon"></i>
+                <span>Coordinadores</span>
+            </a>
+            <a href="#semilleristas" class="nav-item">
+                <i class="fas fa-users nav-icon"></i>
+                <span>Semilleristas</span>
+            </a>
+            
+            <div class="nav-category">Investigación</div>
+            <a href="#proyectos" class="nav-item">
+                <i class="fas fa-tasks nav-icon"></i>
+                <span>Proyectos</span>
+            </a>
+            <a href="#publicaciones" class="nav-item">
+                <i class="fas fa-book nav-icon"></i>
+                <span>Publicaciones</span>
+            </a>
+            
+            <div class="nav-category">Participación</div>
+            <a href="#convocatorias" class="nav-item">
+                <i class="fas fa-bell nav-icon"></i>
+                <span>Convocatoria</span>
+            </a>
+            <a href="#contacto" class="nav-item">
+                <i class="fas fa-envelope nav-icon"></i>
+                <span>Contacto</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <!-- Sección Inicio -->
+        <section id="inicio" class="card">
+            <h2><i class="fas fa-home title-icon"></i> Semillero de Investigación GIDSYC</h2>
+            
+            <img src="IMG/grupo-semillero.jpg" alt="Imagen del semillero" style="width: 100%; border-radius: 8px; margin: 1.5rem 0;">
+            
+            <div class="feature-box">
+                <i class="fas fa-university icon-feature"></i>
+                <div>
+                    <h3>Universidad del Magdalena</h3>
+                </div>
+            </div>
+             <p>El Semillero GIDSYC es una iniciativa de la Facultad de Ingeniería de la Universidad del Magdalena que promueve la investigación formativa en el área de desarrollo de software, computación y sistemas de información.</p>
+            
+            <div class="feature-box">
+                <i class="fas fa-lightbulb icon-feature"></i>
+                <div>
+                    <h3>Nuestro Enfoque</h3>
+                </div>
+            </div>
+            <p>Fomentamos el aprendizaje práctico y la innovación tecnológica a través de proyectos reales que abordan problemáticas locales y regionales, preparando a nuestros estudiantes para los desafíos del mundo digital.</p>
         </section>
 
-        
-        <section class="section-card institutional-info">
-            <h2><i class="fas fa-university"></i> Contexto Institucional</h2>
-            <p>La Vicerrectoría de Investigación de la Universidad del Magdalena, adscrita a la Rectoría, coordina y promueve la investigación en la institución. Los semilleros de investigación son grupos de estudiantes que se vinculan a grupos de investigación reconocidos para iniciar su formación en investigación y apoyar el desarrollo de las actividades del grupo.</p>
-            <p>El semillero GIDSYC está reconocido oficialmente por la universidad como parte de su estrategia para fomentar la cultura investigativa entre los estudiantes de pregrado y posgrado.</p>
-        </section>
-        
-        <section class="section-card" id="benefits">
-            <h2><i class="fas fa-star"></i> Beneficios Exclusivos</h2>
-            <ul>
-                <li><span class="highlight">Formación investigativa:</span> Domina metodologías de investigación.</li>
-                <li><span class="highlight">Proyectos innovadores:</span> Trabaja en soluciones tecnológicas.</li>
-                <li><span class="highlight">Publicaciones científicas:</span> Recibe mentoría para publicar en revistas indexadas.</li>
-                <li><span class="highlight">Competencias:</span> Participa en eventos y concursos nacionales/internacionales.</li>
-                <li><span class="highlight">Becas:</span> Oportunidades para pasantías y movilidad académica.</li>
-            </ul>
+        <!-- Sección Objetivos -->
+        <section id="objetivos" class="card">
+            <h2><i class="fas fa-bullseye title-icon"></i> Objetivos del Semillero</h2>
             
-            <div class="countdown" id="countdown">
-                <div class="countdown-item">
-                    <div class="countdown-number" id="days">00</div>
-                    <div class="countdown-label">Días</div>
+            <ul style="line-height: 1.8;">
+                        <li>Fomentar el espíritu investigativo entre estudiantes de ingeniería de sistemas y afines</li>
+                        <li>Desarrollar habilidades en metodologías de investigación científica y tecnológica</li>
+                        <li>Generar productos académicos de calidad (artículos, ponencias, prototipos)</li>
+                        <li>Contribuir a la solución de problemas tecnológicos del Caribe colombiano</li>
+            </ul>
+        </section>
+
+        <!-- Sección Líneas de Investigación -->
+        <section id="lineas" class="card">
+            <h2><i class="fas fa-project-diagram title-icon"></i> Líneas de Investigación</h2>
+            
+            <div class="feature-box">
+                <i class="fas fa-code icon-feature"></i>
+                <div>
+                    <h3>Ingeniería de Software</h3>
                 </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="hours">00</div>
-                    <div class="countdown-label">Horas</div>
+            </div>
+            <p>Investigación en computación en la nube, sistemas paralelos y arquitecturas distribuidas para entornos de alta demanda.</p>
+            
+            <div class="feature-box">
+                <i class="fas fa-brain icon-feature"></i>
+                <div>
+                    <h3>Inteligencia Artificial</h3>
                 </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="minutes">00</div>
-                    <div class="countdown-label">Minutos</div>
+            </div>
+            <p>Investigación en machine learning, procesamiento de lenguaje natural, visión por computadora y sistemas inteligentes aplicados a problemas institucionales.</p>
+            
+            <div class="feature-box">
+                <i class="fas fa-database icon-feature"></i>
+                <div>
+                    <h3>Bases de Datos y Big Data</h3>
                 </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="seconds">00</div>
-                    <div class="countdown-label">Segundos</div>
+            </div>
+            <p>Estudio y desarrollo de sistemas de gestión de datos, minería de datos y análisis de grandes volúmenes de información.</p>
+            
+            <div class="feature-box">
+                <i class="fas fa-network-wired icon-feature"></i>
+                <div>
+                    <h3>Programacion de bajo nivel</h3>
+                </div>
+            </div>
+            <p>Investigación en programación de bajo nivel, desarrollo de lenguajes de programación y optimización de código para entornos de recursos limitados.</p>
+        </section>
+
+        <!-- Sección Equipo -->
+        <section id="coordinadores" class="card">
+            <h2><i class="fas fa-chalkboard-teacher title-icon"></i> Docentes Coordinadores</h2>
+            <p>Profesores investigadores que guían nuestro trabajo</p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <h3>Dr. Esmeide Leal Narváez</h3>
+                    <p>Docente colaborador</p>
+                    <p><small>En proceso...</small></p>
+                    <p><i class="fas fa-envelope" style="color: var(--color-primario);"></i> En proceso...</p>
+                </div>
+                
+                <div class="team-member">
+                    <h3>Dr. Germán Sánchez Torres</h3>
+                    <p>Coordinador principal</p>
+                    <p><small>En proceso...</small></p>
+                    <p><i class="fas fa-envelope" style="color: var(--color-primario);"></i> En proceso...</p>
+                </div>
+                
+                <div class="team-member">
+                    <h3>Dr. Nallig Leal Narváez</h3>
+                    <p>Docente colaborador</p>
+                    <p><small>En proceso...</small></p>
+                    <p><i class="fas fa-envelope" style="color: var(--color-primario);"></i> En proceso...</p>
+                </div>
+
+                <div class="team-member">
+                    <h3>Dr. Carlos Henríquez Miranda</h3>
+                    <p>Docente colaborador</p>
+                    <p><small>En proceso...</small></p>
+                    <p><i class="fas fa-envelope" style="color: var(--color-primario);"></i> En proceso...</p>
                 </div>
             </div>
         </section>
 
-        <section class="section-card" id="academic-production">
-        <h2><i class="fas fa-book-open"></i> Producción Académica del Semillero</h2>
-        <p>El semillero GIDSYC promueve la participación activa de sus integrantes en espacios académicos de alto nivel, orientados a la divulgación científica, el intercambio de conocimiento y el desarrollo de soluciones con impacto social y tecnológico.</p>
-    
-        <ul>
-            <li><span class="highlight">Ponencias:</span> <a href="https://drive.google.com/drive/folders/18ASb0uN8hsLqg17VfWwtqH7-JAZKowfu?usp=sharing" target="_blank" rel="noopener">Participación en congresos, simposios y seminarios nacionales</a> </li>
-            <li><span class="highlight">Proyectos de Investigación:</span> <a href="https://universidadmag-my.sharepoint.com/:f:/g/personal/csaballeth_unimagdalena_edu_co/EmFErql3LHlDhXZ0SESWkVQBTfDtq0WrVeQWWFSjwtGzqw?e=phfIZe" target="_blank" rel="noopener">Formulación, ejecución y seguimiento de investigaciones aplicadas en ciencia y tecnología. </a></li>
-            <li><span class="highlight">Artículos Científicos:</span> <a href= "https://drive.google.com/drive/folders/1hm0cR8j-Xu_AHQjkNxWXn63BqFz1udpn?usp=sharing" target="_blank" rel="noopener">Redacción y publicación de papers en revistas indexadas con el acompañamiento del grupo de investigación GIDSYC.> </a></li>
-        </ul>
-
-        <p style="margin-top: 1.5rem;">Estas actividades permiten fortalecer las competencias investigativas de los estudiantes y contribuyen a la visibilidad científica institucional.</p>
+        <section id="semilleristas" class="card">
+            <h2><i class="fas fa-users title-icon"></i> Semilleristas Activos</h2>
+            <p>Estudiantes investigadores que conforman nuestro equipo</p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <h3>Camilo Saballeth</h3>
+                    <p>Ingeniería de Sistemas</p>
+                    <p><small>Línea de investigación: Ingeniería de Software</small></p>
+                </div>
+                
+                <div class="team-member">
+                    <h3>Daniel Bonnet</h3>
+                    <p>Ingeniería de sistemas</p>
+                    <p><small>Línea de investigación: Código de bajo nivel</small></p>
+                </div>
+                
+                <div class="team-member">
+                    <h3>Rafael</h3>
+                    <p>Ingeniería de sistemas</p>
+                    <p><small>Línea de investigación: En proceso...</small></p>
+                </div>
+                
+                <div class="team-member">
+                    <h3>Carlos</h3>
+                    <p>Ingeniería de sistemas</p>
+                    <p><small>Línea de investigación: En proceso...</small></p>
+                </div>
+            </div>
         </section>
-        
-        <section class="section-card" id="requirements">
-            <h2><i class="fas fa-clipboard-check"></i> Requisitos de Ingreso</h2>
-            <ul>
-                <li>Estar matriculado en programas de ingeniería, tecnología o ciencias computacionales.</li>
-                <li>Disponibilidad de 8 horas semanales para actividades del semillero.</li>
-                <li>Rellenar el formulario de inscripción.</li>
+
+        <!-- Sección Proyectos -->
+        <section id="proyectos" class="card">
+            <h2><i class="fas fa-tasks title-icon"></i> Proyectos de Investigación</h2>
+            <p>Nuestras iniciativas y trabajos en desarrollo</p>
+
+            <h3>Proyectos de investigación</h3>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="background-color: var(--color-primario); color: white;">
+                        <tr>
+                            <th style="padding: 12px; text-align: left;">Proyecto</th>
+                            <th style="padding: 12px; text-align: left;">Descripción</th>
+                            <th style="padding: 12px; text-align: center;">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--color-borde);">
+                            <td style="padding: 12px; font-weight: 500;">Sistema de recomendación de inmuebles</td>
+                            <td style="padding: 12px;">Sistema de filtrado colaborativo para usuarios en búsqueda de propiedades.</td>
+                            <td style="padding: 12px; text-align: center;"><span style="background-color: #f8d7da; color: #721c24; padding: 4px 8px; border-radius: 12px; font-size: 0.85rem;">Finalizando</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--color-borde);">
+                            <td style="padding: 12px; font-weight: 500;">Sistema de creacion de modelos UML por voz</td>
+                            <td style="padding: 12px;">Desarrollo de un prototipo de software accesible para la creacion de modelos UML basado en voz digirido a estudiantes con discapacidad visual en la ingenieria de software</td>
+                            <td style="padding: 12px; text-align: center;"><span style="background-color: #f8d7da; color: #721c24; padding: 4px 8px; border-radius: 12px; font-size: 0.85rem;">Finalizando</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; font-weight: 500;">ChatBot asistente en las inquietudes de los aspirantes - Tashi Epieyú</td>
+                            <td style="padding: 12px;">En proceso...</td>
+                            <td style="padding: 12px; text-align: center;"><span style="background-color: #f8d7da; color: #721c24; padding: 4px 8px; border-radius: 12px; font-size: 0.85rem;">Finalizando</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; font-weight: 500;">Analisis_de_Sentimiento en twitter en tiempos de pandemia</td>
+                            <td style="padding: 12px;">En proceso...</td>
+                            <td style="padding: 12px; text-align: center;"><span style="background-color: #f8d7da; color: #721c24; padding: 4px 8px; border-radius: 12px; font-size: 0.85rem;">Finalizando</span></td>
+                        </tr>
+                    </tbody>  
+                </table>
+            </div>
+            
+        </section>
+
+        <!-- Sección Publicaciones -->
+        <section id="publicaciones" class="card">
+            <h2><i class="fas fa-book title-icon"></i> Publicaciones</h2>
+            <p>Resultados de nuestras investigaciones</p>
+            
+            <div class="feature-box">
+                <i class="fas fa-newspaper icon-feature"></i>
+                <div>
+                    <h3>Ponencias</h3>
+                </div>
+            </div>
+            <ul style="line-height: 1.8;">
+                        <li><strong>En proceso...</strong> et al. (2023). "Un enfoque basado en grafos para recomendaciones turísticas". <em>Revista Colombiana de Computación</em>, 24(2), 45-62.</li>
+                        <li><strong>En proceso...</strong> et al. (2023). "Análisis comparativo de algoritmos de clustering para datos agrícolas". <em>Journal of Agricultural Informatics</em>, 15(3), 112-125.</li>
+                        <li><strong>En proceso...</strong> & <strong>A.</strong> (2022). "Detección de patrones en noticias falsas usando transformers". <em>Memorias del Congreso Internacional de Ingeniería de Sistemas</em>.</li>
             </ul>
         </section>
-        
-        <section class="section-card" id="apply">
-            <h2><i class="fas fa-rocket"></i> Proceso de Selección</h2>
-            <ol style="list-style-type: decimal; padding-left: 2rem;">
-                <li>Inscripción en línea (formulario digital).</li>
-                <li>Publicación de resultados mediante contacto directo.</li>
-            </ol>
-            
-            <p style="margin-top: 1.5rem; font-size: 1.2rem;">Fecha límite de inscripción: <span class="highlight" id="deadline">30 de agosto de 2025.</span></p>
-            
-            <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=G85p_cYg7EK1Tm0bOHCsboywx1khzT5KnxtiqvOpc5hUQklYRUZQRVRIU0tJNzhRNFZXREo2UTExUC4u" class="btn" id="applyBtn" target="_blank">
-            ¡Quiero Aplicar! <i class="fas fa-arrow-right"></i>
+
+        <section id="convocatorias" class="card">
+                <h2><i class="fas fa-bell title-icon"></i> Convocatoria</h2>
+                <p>Consulta la convocatoria vigente para participar en proyectos y actividades del semillero.</p>
+                <a href="https://saballeth.github.io/Convocatoria GIDSYC" target="_blank" class="button">
+                Ver convocatoria actual
             </a>
         </section>
-    
-
-    </div>
 
 
-    <footer>
-        <div class="container">
-            <h3 style="margin-bottom: 1rem;">Contáctanos</h3>
-            <p>Semillero GIDSYC - Facultad de Ingeniería</p>
-            <p>Universidad del Magdalena</p>
-            <p>WhatsApp: +57 3008099170 | Outlook: csaballeth@unimagdalena.edu.co</p>
-            <p style="margin-top: 1.5rem; opacity: 0.8; font-size: 0.9rem;">© 2025 Semillero GIDSYC. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-    
-    <div class="floating-btn" id="floatingBtn" title="¡Aplica ahora!">
-        <i class="fas fa-paper-plane"></i>
-    </div>
-    
-    <script>
-        // Contador regresivo
-        function initCountdown() {
-            // Fecha límite: 30 de agosto 2025 a las 23:59:59
-            const deadline = new Date('August 30, 2025 23:59:59').getTime();
+        <!-- Sección Contacto -->
+        <section id="contacto" class="card">
+            <h2><i class="fas fa-envelope title-icon"></i> Contacto</h2>
             
-            const countdownTimer = setInterval(function() {
-                const now = new Date().getTime();
-                const distance = deadline - now;
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h3>Información de contacto</h3>
+                    <p><i class="fas fa-phone" style="color: var(--color-primario); margin-right: 10px;"></i> <strong>Teléfono:</strong> +57 3008099170</p>
+                    <p><i class="fas fa-envelope" style="color: var(--color-primario); margin-right: 10px;"></i> <strong>Email:</strong> csaballeth@unimagdalena.edu.co</p>
+                    
+                </div>
                 
-                // Cálculos de tiempo
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                
-                // Mostrar resultados
-                document.getElementById('days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-                
-                // Si el tiempo ha terminado
-                if (distance < 0) {
-                    clearInterval(countdownTimer);
-                    document.getElementById('countdown').innerHTML = `
-                        <div class="countdown-ended">
-                            <i class="fas fa-exclamation-circle"></i>
-                            <span>¡La convocatoria ha cerrado!</span>
+                <div>
+                    <h3>Formulario de contacto</h3>
+                    <form style="display: grid; gap: 1rem;">
+                        <div>
+                            <label for="nombre" style="display: block; margin-bottom: 5px; font-weight: 500;">Nombre completo</label>
+                            <input type="text" id="nombre" style="width: 100%; padding: 10px; border: 1px solid var(--color-borde); border-radius: 4px;">
                         </div>
-                    `;
-                }
-            }, 1000);
-        }
-        
+                        
+                        <div>
+                            <label for="email" style="display: block; margin-bottom: 5px; font-weight: 500;">Correo electrónico</label>
+                            <input type="email" id="email" style="width: 100%; padding: 10px; border: 1px solid var(--color-borde); border-radius: 4px;">
+                        </div>
+                        
+                        <div>
+                            <label for="asunto" style="display: block; margin-bottom: 5px; font-weight: 500;">Asunto</label>
+                            <select id="asunto" style="width: 100%; padding: 10px; border: 1px solid var(--color-borde); border-radius: 4px;">
+                                <option>Información general</option>
+                                <option>Participación en el semillero</option>
+                                <option>Colaboración en proyectos</option>
+                                <option>Otra consulta</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="mensaje" style="display: block; margin-bottom: 5px; font-weight: 500;">Mensaje</label>
+                            <textarea id="mensaje" rows="4" style="width: 100%; padding: 10px; border: 1px solid var(--color-borde); border-radius: 4px;"></textarea>
+                        </div>
+                        
+                        <button type="submit" style="background-color: var(--color-primario); color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: 500;">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
 
-        function initSidebarSliders() {
-    document.querySelectorAll('.sidebar-slider').forEach(slider => {
-        const slides = slider.querySelectorAll('.slide');
-        let index = 0;
-
-        setInterval(() => {
-            slides[index].classList.remove('active');
-            index = (index + 1) % slides.length;
-            slides[index].classList.add('active');
-        }, 4000); // Cambia cada 4 segundos
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    initCountdown();
-    initFloatingButton();
-    initApplyButton();
-    initSidebarSliders(); // <--- activa los sliders laterales
-});
-
-        // Botón flotante
-        function initFloatingButton() {
-            const floatingBtn = document.getElementById('floatingBtn');
-            
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 300) {
-                    floatingBtn.style.display = 'flex';
-                } else {
-                    floatingBtn.style.display = 'none';
-                }
-            });
-            
-            floatingBtn.addEventListener('click', function() {
-                document.getElementById('applyBtn').click();
-            });
-        }
-        
-        // Botón de aplicación
-        function initApplyButton() {
-            document.getElementById('applyBtn').addEventListener('click', function() {
-                alert('Serás redirigido al formulario de inscripción');
-                // Aquí iría la redirección real:
-                // window.location.href = "formulario.html";
-            });
-        }
-        
-        // Inicializar todo cuando el DOM esté listo
+    <!-- Scripts -->
+    <script>
+        // Script para manejar la navegación suave y el estado activo
         document.addEventListener('DOMContentLoaded', function() {
-            initCountdown();
-            initFloatingButton();
-            initApplyButton();
+            // Manejar clics en los items del menú
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // Prevenir comportamiento por defecto solo si es un ancla
+                    if (this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        
+                        // Actualizar estado activo
+                        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Desplazamiento suave
+                        const targetId = this.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 20,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Actualizar item activo al hacer scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section[id]');
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - 100) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${currentSection}`) {
+                        item.classList.add('active');
+                    }
+                });
+            });
         });
-
-
-        const izquierdaImgs = ["IMG/Editar señales.png", "IMG/Editar señales.png"];
-  const derechaImgs = ["IMG/Editar señales.png", "IMG/Editar señales.png"];
-
-  function rotarImagenes(clase, imagenes) {
-    const contenedor = document.querySelector(`.lateral.${clase}`);
-    let index = 0;
-
-    setInterval(() => {
-      contenedor.querySelectorAll('img').forEach((img, i) => {
-        img.style.opacity = 0;
-        setTimeout(() => {
-          index = (index + 1) % imagenes.length;
-          img.src = imagenes[index];
-          img.style.opacity = 1;
-        }, 1000); // tiempo de desvanecimiento
-      });
-    }, 4000); // tiempo entre cambios
-  }
-
-  rotarImagenes("izquierda", izquierdaImgs);
-  rotarImagenes("derecha", derechaImgs);
-
     </script>
 </body>
-
 </html>
