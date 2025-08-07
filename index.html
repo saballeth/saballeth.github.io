@@ -38,16 +38,22 @@
         }
 
         .logo-container {
-            padding: 1.5rem;
+            /* padding: 1.5rem; */
             text-align: center;
             border-bottom: 1px solid var(--color-borde);
-            background-color: var(--color-primario);
+            background-color: var(--color-primario); /* asegúrate que sea azul oscuro si el fondo general es negro */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* para dar profundidad */
         }
+
 
         .logo {
             max-width: 180px;
             height: auto;
+            background-color: black; /* o white, según lo que combine mejor */
+            border-radius: 0.5rem;
+            padding: 0.5rem;
         }
+
 
         .nav-menu {
             padding: 1.5rem 0;
@@ -222,7 +228,7 @@
     <!-- Barra lateral de navegación -->
     <div class="sidebar">
         <div class="logo-container">
-            <img src="IMG/logo-semillero.png" alt="Logo Semillero GIDSYC" class="logo">
+            <!--<img src="IMG/LOGO.jpg" alt="Logo Semillero GIDSYC" class="logo"> -->
         </div>
         
         <div class="nav-menu">
@@ -328,15 +334,7 @@
                 </div>
             </div>
             <p>Investigación en machine learning, procesamiento de lenguaje natural, visión por computadora y sistemas inteligentes aplicados a problemas institucionales.</p>
-            
-            <div class="feature-box">
-                <i class="fas fa-database icon-feature"></i>
-                <div>
-                    <h3>Bases de Datos y Big Data</h3>
-                </div>
-            </div>
-            <p>Estudio y desarrollo de sistemas de gestión de datos, minería de datos y análisis de grandes volúmenes de información.</p>
-            
+    
             <div class="feature-box">
                 <i class="fas fa-network-wired icon-feature"></i>
                 <div>
@@ -467,9 +465,9 @@
                 </div>
             </div>
             <ul style="line-height: 1.8;">
-                        <li><strong>En proceso...</strong> et al. (2023). "Un enfoque basado en grafos para recomendaciones turísticas". <em>Revista Colombiana de Computación</em>, 24(2), 45-62.</li>
-                        <li><strong>En proceso...</strong> et al. (2023). "Análisis comparativo de algoritmos de clustering para datos agrícolas". <em>Journal of Agricultural Informatics</em>, 15(3), 112-125.</li>
-                        <li><strong>En proceso...</strong> & <strong>A.</strong> (2022). "Detección de patrones en noticias falsas usando transformers". <em>Memorias del Congreso Internacional de Ingeniería de Sistemas</em>.</li>
+                        <li><strong>En proceso...</strong> et al. (2023). "En proceso...". <em>Revista Colombiana de Computación</em>, 24(2), 45-62.</li>
+                        <li><strong>En proceso...</strong> En proceso... <em>Caribetic</em>, 15(3), 112-125.</li>
+                        <li><strong>En proceso...</strong> & <strong>A.</strong> En proceso... <em>Memorias del Congreso Internacional de Ingeniería de Sistemas</em>.</li>
             </ul>
         </section>
 
