@@ -21,6 +21,7 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             min-height: 100vh;
             background-color: var(--color-fondo);
             color: var(--color-texto);
@@ -35,25 +36,38 @@
             height: 100vh;
             overflow-y: auto;
             z-index: 1000;
+            transition: transform 0.3s ease;
         }
 
         .logo-container {
-            /* padding: 1.5rem; */
             text-align: center;
             border-bottom: 1px solid var(--color-borde);
-            background-color: var(--color-primario); /* asegúrate que sea azul oscuro si el fondo general es negro */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* para dar profundidad */
+            background-color: var(--color-primario);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            position: relative;
         }
 
+        .menu-toggle {
+            display: none;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
 
         .logo {
             max-width: 180px;
             height: auto;
-            background-color: black; /* o white, según lo que combine mejor */
+            background-color: black;
             border-radius: 0.5rem;
             padding: 0.5rem;
         }
-
 
         .nav-menu {
             padding: 1.5rem 0;
@@ -97,6 +111,7 @@
             margin-left: 280px;
             flex: 1;
             padding: 2rem 3rem;
+            transition: margin-left 0.3s ease;
         }
 
         /* Componentes */
@@ -129,11 +144,10 @@
 
         .feature-box {
             display: flex;
-            align-items: center; /* alinea verticalmente el ícono con el texto */
-            gap: 1rem; /* espacio entre ícono y texto, mejor que margin-right manual */
+            align-items: center;
+            gap: 1rem;
             margin-bottom: 1.5rem;
         }
-
 
         .team-grid {
             display: grid;
@@ -183,7 +197,7 @@
             object-fit: cover;
         }
 
-                .button {
+        .button {
             display: inline-block;
             padding: 0.6em 1.2em;
             background-color: #007BFF;
@@ -198,29 +212,143 @@
             background-color: #0056b3;
         }
 
-
         .project-info {
             padding: 1.2rem;
         }
 
         /* Responsive */
+        @media (max-width: 1200px) {
+            .main-content {
+                padding: 1.5rem 2rem;
+            }
+        }
+
         @media (max-width: 992px) {
             .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
+                transform: translateX(-100%);
+                width: 280px;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: 0;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
             }
             
             .main-content {
                 margin-left: 0;
                 padding: 1.5rem;
             }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0,0,0,0.5);
+                z-index: 999;
+                display: none;
+            }
+            
+            .overlay.active {
+                display: block;
+            }
         }
 
         @media (max-width: 768px) {
             .team-grid, .project-gallery {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-template-columns: 1fr;
             }
+            
+            .contact-container {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+            
+            .card {
+                padding: 1rem;
+            }
+            
+            .main-content {
+                padding: 1rem;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .feature-box {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .icon-feature {
+                margin-bottom: 0.5rem;
+            }
+            
+            .team-member img {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .project-card img {
+                height: 150px;
+            }
+        }
+
+        /* Estilos adicionales para mejor responsividad */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-borde);
+        }
+        
+        thead {
+            background-color: var(--color-primario);
+            color: white;
+        }
+        
+        .status-badge {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .status-badge.process {
+            background-color: #ebaf77;
         }
     </style>
 </head>
@@ -228,6 +356,9 @@
     <!-- Barra lateral de navegación -->
     <div class="sidebar">
         <div class="logo-container">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-times"></i>
+            </button>
             <!--<img src="IMG/LOGO.jpg" alt="Logo Semillero GIDSYC" class="logo"> -->
         </div>
         
@@ -277,15 +408,17 @@
             </a>
         </div>
     </div>
+    
+    <div class="overlay" id="overlay"></div>
 
     <!-- Contenido principal -->
     <div class="main-content">
+        <button class="menu-toggle" id="mobileMenuToggle" style="display: none; margin-bottom: 1rem;">
+            <i class="fas fa-bars"></i> Menú
+        </button>
+        
         <!-- Sección Inicio -->
         <section id="inicio" class="card">
-            <!-- <h2><i class="fas fa-home title-icon"></i> Semillero de Investigación GIDSYC</h2> -->
-            
-            <!-- <img src="IMG/grupo-semillero.jpg" alt="Imagen del semillero" style="width: 100%; border-radius: 8px; margin: 1.5rem 0;"> -->
-            
             <div class="feature-box">
                 <i class="fas fa-university icon-feature"></i>
                 <div>
@@ -308,10 +441,10 @@
             <h2><i class="fas fa-bullseye title-icon"></i> Objetivos del Semillero</h2>
             
             <ul style="line-height: 1.8;">
-                        <li>Fomentar el espíritu investigativo entre estudiantes de ingeniería de sistemas y afines</li>
-                        <li>Desarrollar habilidades en metodologías de investigación científica y tecnológica</li>
-                        <li>Generar productos académicos de calidad (artículos, ponencias, prototipos)</li>
-                        <li>Contribuir a la solución de problemas tecnológicos del Caribe colombiano</li>
+                <li>Fomentar el espíritu investigativo entre estudiantes de ingeniería de sistemas y afines</li>
+                <li>Desarrollar habilidades en metodologías de investigación científica y tecnológica</li>
+                <li>Generar productos académicos de calidad (artículos, ponencias, prototipos)</li>
+                <li>Contribuir a la solución de problemas tecnológicos del Caribe colombiano</li>
             </ul>
         </section>
 
@@ -417,52 +550,51 @@
             <p>Nuestras iniciativas y trabajos en desarrollo</p>
 
             <h3>Proyectos de investigación</h3>
-            <div style="overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead style="background-color: var(--color-primario); color: white;">
+            <div class="table-responsive">
+                <table>
+                    <thead>
                         <tr>
-                            <th style="padding: 12px; text-align: left;">Proyecto</th>
-                            <th style="padding: 12px; text-align: left;">Descripción</th>
-                            <th style="padding: 12px; text-align: center;">Estado</th>
+                            <th>Proyecto</th>
+                            <th>Descripción</th>
+                            <th style="text-align: center;">Estado</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom: 1px solid var(--color-borde);">
-                            <td style="padding: 12px; font-weight: 500;">Sistema de recomendación de inmuebles</td>
-                            <td style="padding: 12px;">Sistema de filtrado colaborativo para usuarios en búsqueda de propiedades.</td>
-                            <td style="padding: 12px; text-align: center;"><span style="background-color: #f8d7da; color: #721c24; padding: 4px 8px; border-radius: 12px; font-size: 0.85rem;">Finalizando</span></td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--color-borde);">
-                            <td style="padding: 12px; font-weight: 500;">Sistema de creacion de modelos UML por voz</td>
-                            <td style="padding: 12px;">Desarrollo de un prototipo de software accesible para la creacion de modelos UML basado en voz digirido a estudiantes con discapacidad visual en la ingenieria de software</td>
-                            <td style="padding: 12px; text-align: center;"><span style="background-color: #ebaf77; color: #721c24; padding: 4px 8px; border-radius: 12px; font-size: 0.85rem;">En proceso</span></td>
+                        <tr>
+                            <td style="font-weight: 500;">Sistema de recomendación de inmuebles</td>
+                            <td>Sistema de filtrado colaborativo para usuarios en búsqueda de propiedades.</td>
+                            <td style="text-align: center;"><span class="status-badge">Finalizando</span></td>
                         </tr>
                         <tr>
-                            <td style="padding: 12px; font-weight: 500;">ChatBot asistente en las inquietudes de los aspirantes - Tashi Epieyú</td>
-                            <td style="padding: 12px;">se logró desarrollar un ChatBot funcional, disponible para la comunidad magdalenense, orientado a resolver dudas de aspirantes a la universidad. Aunque en general respondió adecuadamente, se identificaron fallos ante errores ortográficos por parte del usuario (por ejemplo, "medicin" en lugar de "medicina"), lo que generó respuestas incorrectas. No obstante, cuando el mensaje estaba bien escrito, el ChatBot brindó respuestas satisfactorias.
+                            <td style="font-weight: 500;">Sistema de creacion de modelos UML por voz</td>
+                            <td>Desarrollo de un prototipo de software accesible para la creacion de modelos UML basado en voz digirido a estudiantes con discapacidad visual en la ingenieria de software</td>
+                            <td style="text-align: center;"><span class="status-badge process">En proceso</span></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">ChatBot asistente en las inquietudes de los aspirantes - Tashi Epieyú</td>
+                            <td>se logró desarrollar un ChatBot funcional, disponible para la comunidad magdalenense, orientado a resolver dudas de aspirantes a la universidad. Aunque en general respondió adecuadamente, se identificaron fallos ante errores ortográficos por parte del usuario (por ejemplo, "medicin" en lugar de "medicina"), lo que generó respuestas incorrectas. No obstante, cuando el mensaje estaba bien escrito, el ChatBot brindó respuestas satisfactorias.
 
 Durante su funcionamiento, el ChatBot gestionó un total de 1433 mensajes, incluyendo pruebas internas y consultas reales. La satisfacción media del usuario en el chat fue de 3/5, y en una encuesta adicional, la calificación promedio fue de 4/5.</td>
-                            <td style="padding: 12px; text-align: center;"><span style="background-color: #f8d7da; color: #721c24; padding: 4px 8px; border-radius: 12px; font-size: 0.85rem;">Finalizando</span></td>
+                            <td style="text-align: center;"><span class="status-badge">Finalizando</span></td>
                         </tr>
                         <tr>
-                            <td style="padding: 12px; font-weight: 500;">Analisis_de_Sentimiento en twitter en tiempos de pandemia</td>
-                            <td style="padding: 12px;">En proceso...</td>
-                            <td style="padding: 12px; text-align: center;"><span style="background-color: #f8d7da; color: #721c24; padding: 4px 8px; border-radius: 12px; font-size: 0.85rem;">Finalizando</span></td>
+                            <td style="font-weight: 500;">Analisis_de_Sentimiento en twitter en tiempos de pandemia</td>
+                            <td>En proceso...</td>
+                            <td style="text-align: center;"><span class="status-badge">Finalizando</span></td>
                         </tr>
                         <tr>
-                            <td style="padding: 12px; font-weight: 500;">Desarrollo de Umbra: Una Iniciativa de investigación para el desarrollo de un lenguaje de programación como recurso educativo para estudiantes de los primeros semestres en ingeniería de sistemas.</td>
-                            <td style="padding: 12px;">En proceso...</td>
-                            <td style="padding: 12px; text-align: center;"><span style="background-color: #f8d7da; color: #721c24; padding: 4px 8px; border-radius: 12px; font-size: 0.85rem;">Finalizando</span></td>
+                            <td style="font-weight: 500;">Desarrollo de Umbra: Una Iniciativa de investigación para el desarrollo de un lenguaje de programación como recurso educativo para estudiantes de los primeros semestres en ingeniería de sistemas.</td>
+                            <td>En proceso...</td>
+                            <td style="text-align: center;"><span class="status-badge">Finalizando</span></td>
                         </tr>
                         <tr>
-                            <td style="padding: 12px; font-weight: 500;"> Modulo de inteligencia artificial, capaz de identificar el estado de animo de una persona, mediante el analisis de su voz.</td>
-                            <td style="padding: 12px;">se desarrolló un software capaz de analizar sentimientos en tweets, clasificándolos como positivos o negativos. Esto se logró mediante el uso de técnicas de procesamiento de lenguaje natural que permitieron limpiar, normalizar y etiquetar adecuadamente los textos. La herramienta brinda a los usuarios una visión general del sentir social frente a diferentes temas, facilitando el análisis de opinión pública.</td>
-                            <td style="padding: 12px; text-align: center;"><span style="background-color: #f8d7da; color: #721c24; padding: 4px 8px; border-radius: 12px; font-size: 0.85rem;">Finalizando</span></td>
+                            <td style="font-weight: 500;"> Modulo de inteligencia artificial, capaz de identificar el estado de animo de una persona, mediante el analisis de su voz.</td>
+                            <td>se desarrolló un software capaz de analizar sentimientos en tweets, clasificándolos como positivos o negativos. Esto se logró mediante el uso de técnicas de procesamiento de lenguaje natural que permitieron limpiar, normalizar y etiquetar adecuadamente los textos. La herramienta brinda a los usuarios una visión general del sentir social frente a diferentes temas, facilitando el análisis de opinión pública.</td>
+                            <td style="text-align: center;"><span class="status-badge">Finalizando</span></td>
                         </tr>
                     </tbody>  
                 </table>
             </div>
-            
         </section>
 
         <!-- Sección Publicaciones -->
@@ -477,31 +609,29 @@ Durante su funcionamiento, el ChatBot gestionó un total de 1433 mensajes, inclu
                 </div>
             </div>
             <ul style="line-height: 1.8;">
-                        <li><strong>En proceso...</strong> et al. (2023). "En proceso...". <em>Revista Colombiana de Computación</em>, 24(2), 45-62.</li>
-                        <li><strong>En proceso...</strong> En proceso... <em>Caribetic</em>, 15(3), 112-125.</li>
-                        <li><strong>En proceso...</strong> & <strong>A.</strong> En proceso... <em>Memorias del Congreso Internacional de Ingeniería de Sistemas</em>.</li>
+                <li><strong>En proceso...</strong> et al. (2023). "En proceso...". <em>Revista Colombiana de Computación</em>, 24(2), 45-62.</li>
+                <li><strong>En proceso...</strong> En proceso... <em>Caribetic</em>, 15(3), 112-125.</li>
+                <li><strong>En proceso...</strong> & <strong>A.</strong> En proceso... <em>Memorias del Congreso Internacional de Ingeniería de Sistemas</em>.</li>
             </ul>
         </section>
 
         <section id="convocatorias" class="card">
-                <h2><i class="fas fa-bell title-icon"></i> Convocatoria</h2>
-                <p>Consulta la convocatoria vigente para participar en proyectos y actividades del semillero.</p>
-                <a href="https://saballeth.github.io/Convocatoria GIDSYC" target="_blank" class="button">
+            <h2><i class="fas fa-bell title-icon"></i> Convocatoria</h2>
+            <p>Consulta la convocatoria vigente para participar en proyectos y actividades del semillero.</p>
+            <a href="https://saballeth.github.io/Convocatoria GIDSYC" target="_blank" class="button">
                 Ver convocatoria actual
             </a>
         </section>
-
 
         <!-- Sección Contacto -->
         <section id="contacto" class="card">
             <h2><i class="fas fa-envelope title-icon"></i> Contacto</h2>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div class="contact-container">
                 <div>
                     <h3>Información de contacto</h3>
                     <p><i class="fas fa-phone" style="color: var(--color-primario); margin-right: 10px;"></i> <strong>Teléfono:</strong> +57 3008099170</p>
                     <p><i class="fas fa-envelope" style="color: var(--color-primario); margin-right: 10px;"></i> <strong>Email:</strong> csaballeth@unimagdalena.edu.co</p>
-                    
                 </div>
                 
                 <div>
@@ -543,6 +673,38 @@ Durante su funcionamiento, el ChatBot gestionó un total de 1433 mensajes, inclu
     <script>
         // Script para manejar la navegación suave y el estado activo
         document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            // Función para alternar el menú
+            function toggleMenu() {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            }
+            
+            // Mostrar/ocultar menú en móviles
+            if (window.innerWidth <= 992) {
+                mobileMenuToggle.style.display = 'block';
+            }
+            
+            // Event listeners para los botones del menú
+            mobileMenuToggle.addEventListener('click', toggleMenu);
+            menuToggle.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', toggleMenu);
+            
+            // Manejar redimensionamiento de la ventana
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 992) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    mobileMenuToggle.style.display = 'none';
+                } else {
+                    mobileMenuToggle.style.display = 'block';
+                }
+            });
+            
             // Manejar clics en los items del menú
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.addEventListener('click', function(e) {
@@ -562,6 +724,11 @@ Durante su funcionamiento, el ChatBot gestionó un total de 1433 mensajes, inclu
                                 top: targetElement.offsetTop - 20,
                                 behavior: 'smooth'
                             });
+                        }
+                        
+                        // Cerrar menú en móviles
+                        if (window.innerWidth <= 992) {
+                            toggleMenu();
                         }
                     }
                 });
