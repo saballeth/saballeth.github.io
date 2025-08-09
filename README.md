@@ -24,9 +24,9 @@ Tiene como propósito principal soportar las líneas de investigación en admini
 ## 👨‍🎓 Semilleristas Activos
 
 - [Camilo Saballeth](https://github.com/saballeth)
+- Nombre estudiante 2
+- Numero estudiante 3
 - [Daniel Bonnett](https://github.com/mordmora)
-- Nombre estudiante 3
-- (Agregar más)
 
 ---
 
