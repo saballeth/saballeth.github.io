@@ -26,8 +26,7 @@ Tiene como propósito principal soportar las líneas de investigación en admini
 - [Camilo Saballeth](https://github.com/saballeth)
 - Nombre estudiante 2
 - [Luis Saumeth](https://github.com/LJSaumeth)
-- Nombre estudiante 3
-- (Agregar más)
+- [Daniel Bonnett](https://github.com/mordmora)
 
 ---
 
@@ -39,6 +38,7 @@ Tiene como propósito principal soportar las líneas de investigación en admini
 | [Sistema de creacion de modelos UML por voz](.[[/uml-voz/](https://saballeth.github.io/Sistema_De_Recomendacion_Inmuebles/](https://saballeth.github.io/chatbot-accesible/))) | Desarrollo de un prototipo de software accesible para la creacion de modelos UML basado en voz digirido a estudiantes con discapacidad visual en la ingenieria de software|
 | [ChatBot asistente en las inquietudes de los aspirantes - Tashi Epieyú](.[/inmuebles/](https://saballeth.github.io/Sistema_De_Recomendacion_Inmuebles/)) |se logró desarrollar un ChatBot funcional, disponible para la comunidad magdalenense, orientado a resolver dudas de aspirantes a la universidad. Aunque en general respondió adecuadamente, se identificaron fallos ante errores ortográficos por parte del usuario (por ejemplo, "medicin" en lugar de "medicina"), lo que generó respuestas incorrectas. No obstante, cuando el mensaje estaba bien escrito, el ChatBot brindó respuestas satisfactorias. Durante su funcionamiento, el ChatBot gestionó un total de 1433 mensajes, incluyendo pruebas internas y consultas reales. La satisfacción media del usuario en el chat fue de 3/5, y en una encuesta adicional, la calificación promedio fue de 4/5.|
 | [Analisis_de_Sentimiento en twitter en tiempos de pandemia](.[[/inmuebles/](https://saballeth.github.io/Sistema_De_Recomendacion_Inmuebles/)](https://saballeth.github.io/Analisis_de_Sentimiento/)) |se desarrolló un software capaz de analizar sentimientos en tweets, clasificándolos como positivos o negativos. Esto se logró mediante el uso de técnicas de procesamiento de lenguaje natural que permitieron limpiar, normalizar y etiquetar adecuadamente los textos. La herramienta brinda a los usuarios una visión general del sentir social frente a diferentes temas, facilitando el análisis de opinión pública.|
+|[Umbra](https://github.com/mordmora/Umbra)|Lenguaje de programación diseñado para facilitar el aprendizaje de habilidades de programación en estudiantes de primer semestre de Ingeniería de Sistemas. Umbra posee una sintaxis clara y legible que evita añadir capas excesivas de abstracción, lo que lo hace intuitivo y fácil de entender, sin sacrificar la responsabilidad algorítmica ni la gestión manual de recursos por parte del programador. Su arquitectura es modular y desmontable, permitiendo a los usuarios inspeccionar todo el proceso de compilación, desde el análisis léxico hasta la generación de código. Umbra emplea LLVM como backend para producir código ensamblador optimizado con técnicas personalizadas, buscando maximizar el rendimiento sin perder claridad ni control.|
 ---
 
 ## 📫 Contacto
