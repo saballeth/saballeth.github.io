@@ -24,13 +24,14 @@ Tiene como propósito principal soportar las líneas de investigación en admini
 ## 👨‍🎓 Semilleristas Activos
 
 - [Camilo Saballeth](https://github.com/saballeth)
+- [Camilo Saballeth](https://github.com/saballeth)
+- [Angelica Sierra](https://github.com/angeliszs)
 - [Andry Polo](https://github.com/populimgg)
 - [Andres Rudas](https://github.com/TheRudas)
 - [Sebastián Aguas](https://github.com/Flytarii)
-- [Luis Saumeth](https://github.com/LJSaumeth)
+- [Luis Saumeth](https://github.com/LJsaumeth)
 - [Daniel Bonnett](https://github.com/mordmora)
 
----
 
 ## 📁 Proyectos del Semillero
 
