@@ -24,12 +24,6 @@ Tiene como propósito principal soportar las líneas de investigación en admini
 ## 👨‍🎓 Semilleristas Activos
 
 - [Camilo Saballeth](https://github.com/saballeth)
-
-- Nombre estudiante 3
-- (Agrega más según el grupo actual)
-
----
-
 - [Angelica Sierra](https://github.com/angeliszs)
 - [Andry Polo](https://github.com/populimgg)
 - [Andres Rudas](https://github.com/TheRudas)
