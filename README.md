@@ -31,7 +31,7 @@ Tiene como propósito principal soportar las líneas de investigación en admini
 - [Luis Saumeth](https://github.com/LJsaumeth)
 - [Daniel Bonnett](https://github.com/mordmora)
 - [Jose Amado](https://github.com/Amadocr)
-
+- [Andres Alvarez ](https://github.com/Kmilo1004)
 
 ## 📁 Proyectos del Semillero
 
