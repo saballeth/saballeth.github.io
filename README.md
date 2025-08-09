@@ -26,7 +26,7 @@ Tiene como propósito principal soportar las líneas de investigación en admini
 - [Camilo Saballeth](https://github.com/saballeth)
 - Nombre estudiante 2
 - Nombre estudiante 3
-- (Agrega más según el grupo actual)
+- (Agregar más)
 
 ---
 
