@@ -30,6 +30,7 @@ Tiene como propósito principal soportar las líneas de investigación en admini
 - [Sebastián Aguas](https://github.com/Flytarii)
 - [Luis Saumeth](https://github.com/LJsaumeth)
 - [Daniel Bonnett](https://github.com/mordmora)
+- [Jose Amado](https://github.com/Amadocr)
 
 
 ## 📁 Proyectos del Semillero
