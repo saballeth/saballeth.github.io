@@ -34,6 +34,7 @@ Tiene como propósito principal soportar las líneas de investigación en admini
 - [Jose Amado](https://github.com/Amadocr)
 - [Andres Alvarez ](https://github.com/Kmilo1004)
 - [Kevin Arias](https://github.com/KenUp06)
+- [William Yanett](https://github.com/willirez).
 
 ## 📁 Proyectos del Semillero
 
