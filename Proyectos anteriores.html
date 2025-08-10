@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio de Investigación - GIDSYC</title>
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
+        html, body {
+            height: 100%;
             margin: 0;
-            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
             background-color: #f5f5f5;
             color: #333;
         }
@@ -80,12 +86,16 @@
             text-decoration: underline;
         }
 
+        /* Push footer to bottom */
+        section {
+            flex: 1;
+        }
+
         footer {
             background-color: #002b5c;
             color: white;
             text-align: center;
             padding: 1rem;
-            margin-top: 2rem;
         }
     </style>
 </head>
@@ -95,52 +105,26 @@
         <p>Semillero GIDSYC - Universidad del Magdalena</p>
     </header>
 
-    <nav>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#ponencias">Ponencias</a>
-        <a href="#contacto">Contacto</a>
-    </nav>
-
     <section id="proyectos">
         <h2 class="section-title">Proyectos de Investigación</h2>
         <div class="cards-container">
             <div class="card">
                 <h3>Análisis de Sentimiento</h3>
-                <p>En proceso...</p>
                 <a href="https://saballeth.github.io/Analisis_de_Sentimiento%20en%20twitter%20en%20tiempos%20de%20pandemia" class="project-link">Ver proyecto →</a>
             </div>
             <div class="card">
                 <h3>Sistema de Creación de Modelos UML por Voz</h3>
-                <p>En proceso...</p>
                 <a href="https://saballeth.github.io/Sistema%20de%20creacion%20de%20modelos%20UML%20por%20voz" class="project-link">Ver proyecto →</a>
             </div>
             <div class="card">
-                <h3>Sistema de recomendación de inmuebles</h3>
-                <p>En proceso...</p>
+                <h3>Una arquitectura de software de un sistema de 
+recomendación de inmueble</h3>
                 <a href="https://saballeth.github.io/Sistema%20de%20recomendaci%C3%B3n%20de%20inmuebles" class="project-link">Ver proyecto →</a>
             </div>
             <div class="card">
                 <h3>ChatBot asistente en las inquietudes de los aspirantes</h3>
-                <p>En proceso...</p>
                 <a href="https://saballeth.github.io/ChatBot%20asistente%20en%20las%20inquietudes%20de%20los%20aspirantes" class="project-link">Ver proyecto →</a>
             </div>
-        </div>
-    </section>
-
-    <section id="ponencias">
-        <h2 class="section-title">Ponencias y Congresos</h2>
-        <div class="cards-container">
-            <div class="card">
-                <h3>En proceso...</h3>
-                <p>En proceso...</p>
-                <a href="#" class="project-link">Ver detalles →</a>
-            </div>
-            <div class="card">
-                <h3>Congreso Nacional de Computación</h3>
-                <p>En proceso...</p>
-                <a href="#" class="project-link">Ver detalles →</a>
-            </div>
-            <!-- Agrega más tarjetas aquí -->
         </div>
     </section>
 
