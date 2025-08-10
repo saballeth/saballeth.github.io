@@ -25,6 +25,7 @@ Tiene como propósito principal soportar las líneas de investigación en admini
 
 - [Camilo Saballeth](https://github.com/saballeth)
 - [Angelica Sierra](https://github.com/angeliszs)
+- [Angela De la Rosa](https://github.com/Angela-dl-Rosa)
 - [Andry Polo](https://github.com/populimgg)
 - [Andres Rudas](https://github.com/TheRudas)
 - [Sebastián Aguas](https://github.com/Flytarii)
