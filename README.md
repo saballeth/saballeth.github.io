@@ -24,14 +24,7 @@ Tiene como propósito principal soportar las líneas de investigación en admini
 ## 👨‍🎓 Semilleristas Activos
 
 - [Camilo Saballeth](https://github.com/saballeth)
-patch-1
 - [Camilo Andres Ramos Cotes](https://github.com/Camiloramos2000)
-- Nombre estudiante 3
-- (Agrega más según el grupo actual)
-
----
-
-
 - [Angelica Sierra](https://github.com/angeliszs)
 - [Angela De la Rosa](https://github.com/Angela-dl-Rosa)
 - [Andry Polo](https://github.com/populimgg)
@@ -45,7 +38,7 @@ patch-1
 - [Kevin Arias](https://github.com/KenUp06)
 - [William Yanett](https://github.com/willirez).
 - [Andres Gamero](https://github.com/AFGamero)
-main
+
 ## 📁 Proyectos del Semillero
 
 | Proyecto | Descripción |
