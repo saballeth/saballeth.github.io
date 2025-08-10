@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio de Investigación - GIDSYC</title>
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
+        html, body {
+            height: 100%;
             margin: 0;
-            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
             background-color: #f5f5f5;
             color: #333;
         }
@@ -80,8 +86,9 @@
             text-decoration: underline;
         }
 
-        main {
-            flex: 1; /* pushes footer to bottom */
+        /* Push footer to bottom */
+        section {
+            flex: 1;
         }
 
         footer {
