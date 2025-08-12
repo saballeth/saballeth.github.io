@@ -39,7 +39,7 @@ Tiene como propósito principal soportar las líneas de investigación en admini
 - [William Yanett](https://github.com/willirez).
 - [Andres Gamero](https://github.com/AFGamero)
 - [Wilman Cabana](https://github.com/WilmanCabana)
-
+- [Steven Verdugo](https://github.com/ALXT3)
 ## 📁 Proyectos del Semillero
 
 | Proyecto | Descripción |
