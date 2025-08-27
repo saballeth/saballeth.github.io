@@ -38,7 +38,7 @@ Tiene como propósito principal soportar las líneas de investigación en admini
 - [Kevin Arias](https://github.com/KenUp06)
 - [William Yanett](https://github.com/willirez).
 - [Wilman Cabana](https://github.com/WilmanCabana)
-
+- [Steven Verdugo](https://github.com/ALXT3)
 ## 📁 Proyectos del Semillero
 
 | Proyecto | Descripción |
