@@ -81,11 +81,15 @@
         <span class="tag">A. Sección teórica</span>
         <h2>Fundamentos</h2>
         <p>Cada tema incluye explicación conceptual, ecuaciones, variables en SI y figuras propias para uso didáctico.</p>
+        <div class="section-controls">
+          <button class="btn btn-secondary small" onclick="expandSection('teoria')">Expandir todo</button>
+          <button class="btn btn-secondary small" onclick="collapseSection('teoria')">Contraer todo</button>
+        </div>
       </div>
 
       <div class="topic-grid">
-        <article class="card topic">
-          <h3>1. Viscosidad</h3>
+        <details class="card topic" open>
+          <summary><h3>1. Viscosidad</h3></summary>
           <p>
             La <strong>viscosidad dinámica</strong> μ cuantifica la resistencia interna del fluido a deformarse por esfuerzo cortante.
             En un fluido newtoniano, el esfuerzo cortante es proporcional al gradiente de velocidad: <span class="inline-eq">τ = μ (du/dy)</span>.
@@ -136,10 +140,10 @@
               <li><strong>y</strong>: coordenada transversal [m]</li>
             </ul>
           </div>
-        </article>
+        </details>
 
-        <article class="card topic">
-          <h3>2. Número de Reynolds</h3>
+        <details class="card topic" open>
+          <summary><h3>2. Número de Reynolds</h3></summary>
           <p>
             El número de Reynolds es un parámetro adimensional que compara las fuerzas inerciales con las fuerzas viscosas:
             <span class="inline-eq">Re = ρVD/μ = VD/ν</span>.
@@ -180,10 +184,10 @@
               <li><strong>ν</strong>: viscosidad cinemática [m²/s]</li>
             </ul>
           </div>
-        </article>
+        </details>
 
-        <article class="card topic">
-          <h3>3. Ecuación de Poiseuille</h3>
+        <details class="card topic" open>
+          <summary><h3>3. Ecuación de Poiseuille</h3></summary>
           <p>
             Para flujo laminar, estacionario, plenamente desarrollado, incomprensible y newtoniano en un conducto cilíndrico,
             la ecuación de Hagen–Poiseuille relaciona caudal y caída de presión como:
@@ -223,10 +227,10 @@
               <li><strong>u(r)</strong>: velocidad axial local [m/s]</li>
             </ul>
           </div>
-        </article>
+        </details>
 
-        <article class="card topic">
-          <h3>4. Ley de Stokes y sedimentación</h3>
+        <details class="card topic" open>
+          <summary><h3>4. Ley de Stokes y sedimentación</h3></summary>
           <p>
             Una partícula esférica que cae en un fluido viscoso experimenta tres fuerzas principales:
             <strong>peso</strong>, <strong>empuje</strong> y <strong>arrastre viscoso</strong>.
@@ -272,7 +276,7 @@
               <li><strong>Re<sub>p</sub></strong>: número de Reynolds de partícula [adimensional]</li>
             </ul>
           </div>
-        </article>
+        </details>
       </div>
     </section>
 
@@ -282,6 +286,10 @@
           <span class="tag">B. Ejercicios resueltos</span>
           <h2>Aplicación de modelos</h2>
           <p>Se presentan datos, modelo, desarrollo, cálculo numérico, verificación dimensional e interpretación física.</p>
+          <div class="section-controls">
+            <button class="btn btn-secondary small" onclick="expandSection('ejercicios')">Expandir todo</button>
+            <button class="btn btn-secondary small" onclick="collapseSection('ejercicios')">Contraer todo</button>
+          </div>
         </div>
 
         <div class="accordion-grid">
@@ -333,11 +341,15 @@
         <span class="tag">C. Ejercicios interactivos</span>
         <h2>Calculadoras académicas</h2>
         <p>Ingrese datos en unidades SI para obtener resultados, clasificación de régimen y chequeos de validez.</p>
+        <div class="section-controls">
+          <button class="btn btn-secondary small" onclick="expandSection('calculadoras')">Expandir todo</button>
+          <button class="btn btn-secondary small" onclick="collapseSection('calculadoras')">Contraer todo</button>
+        </div>
       </div>
 
       <div class="calc-grid">
-        <article class="card calc-card">
-          <h3>Calculadora de Reynolds</h3>
+        <details class="card calc-card" open>
+          <summary><h3>Calculadora de Reynolds</h3></summary>
           <div class="form-grid">
             <label>ρ [kg/m³]<input id="re-rho" type="number" step="any" value="900"></label>
             <label>μ [Pa·s]<input id="re-mu" type="number" step="any" value="0.05"></label>
@@ -346,10 +358,10 @@
           </div>
           <button class="btn btn-primary full" onclick="calcRe()">Calcular Re</button>
           <div id="re-output" class="output"></div>
-        </article>
+        </details>
 
-        <article class="card calc-card">
-          <h3>Calculadora de Poiseuille</h3>
+        <details class="card calc-card" open>
+          <summary><h3>Calculadora de Poiseuille</h3></summary>
           <div class="form-grid">
             <label>μ [Pa·s]<input id="poi-mu" type="number" step="any" value="0.2"></label>
             <label>L [m]<input id="poi-l" type="number" step="any" value="50"></label>
@@ -358,10 +370,10 @@
           </div>
           <button class="btn btn-primary full" onclick="calcPoiseuille()">Calcular ΔP</button>
           <div id="poi-output" class="output"></div>
-        </article>
+        </details>
 
-        <article class="card calc-card">
-          <h3>Calculadora de Stokes</h3>
+        <details class="card calc-card" open>
+          <summary><h3>Calculadora de Stokes</h3></summary>
           <div class="form-grid">
             <label>ρ<sub>p</sub> [kg/m³]<input id="st-rhop" type="number" step="any" value="2650"></label>
             <label>ρ<sub>f</sub> [kg/m³]<input id="st-rhof" type="number" step="any" value="997"></label>
@@ -370,7 +382,7 @@
           </div>
           <button class="btn btn-primary full" onclick="calcStokes()">Calcular v<sub>t</sub> y Re<sub>p</sub></button>
           <div id="st-output" class="output"></div>
-        </article>
+        </details>
       </div>
     </section>
 
@@ -380,17 +392,23 @@
           <span class="tag">D. Laboratorios virtuales</span>
           <h2>Exploración paramétrica con controles y gráficas</h2>
           <p>Use los deslizadores para observar tendencias, sensibilidad de parámetros y rango de validez de los modelos.</p>
+          <div class="section-controls">
+            <button class="btn btn-secondary small" onclick="expandSection('laboratorios')">Expandir todo</button>
+            <button class="btn btn-secondary small" onclick="collapseSection('laboratorios')">Contraer todo</button>
+          </div>
         </div>
 
         <div class="lab-grid">
-          <article class="card lab-card">
-            <div class="lab-head">
-              <div>
-                <h3>Laboratorio 1. Flujo de Poiseuille</h3>
-                <p>Variación de radio, viscosidad, longitud y caída de presión.</p>
+          <details class="card lab-card" open>
+            <summary>
+              <div class="lab-head">
+                <div>
+                  <h3>Laboratorio 1. Flujo de Poiseuille</h3>
+                  <p>Variación de radio, viscosidad, longitud y caída de presión.</p>
+                </div>
+                <div class="mini-badge">Perfil u(r) + caudal Q</div>
               </div>
-              <div class="mini-badge">Perfil u(r) + caudal Q</div>
-            </div>
+            </summary>
 
             <div class="slider-grid">
               <label>Radio R [m] <span id="lab1-r-val">0.010</span>
@@ -410,16 +428,18 @@
             <div class="lab-results" id="lab1-results"></div>
             <canvas id="lab1-canvas" width="760" height="360"></canvas>
             <p class="caption">Figura 5. Gráfico dinámico propio del perfil parabólico de velocidad u(r) en función del radio.</p>
-          </article>
+          </details>
 
-          <article class="card lab-card">
-            <div class="lab-head">
-              <div>
-                <h3>Laboratorio 2. Sedimentación de Stokes</h3>
-                <p>Variación de tamaño de partícula, viscosidad y altura de caída.</p>
+          <details class="card lab-card" open>
+            <summary>
+              <div class="lab-head">
+                <div>
+                  <h3>Laboratorio 2. Sedimentación de Stokes</h3>
+                  <p>Variación de tamaño de partícula, viscosidad y altura de caída.</p>
+                </div>
+                <div class="mini-badge">v<sub>t</sub> + tiempo + Re<sub>p</sub></div>
               </div>
-              <div class="mini-badge">v<sub>t</sub> + tiempo + Re<sub>p</sub></div>
-            </div>
+            </summary>
 
             <div class="slider-grid">
               <label>Diámetro D [μm] <span id="lab2-d-val">50</span>
@@ -439,7 +459,7 @@
             <div class="lab-results" id="lab2-results"></div>
             <canvas id="lab2-canvas" width="760" height="360"></canvas>
             <p class="caption">Figura 6. Gráfico dinámico propio de sensibilidad de la velocidad terminal y del tiempo de sedimentación.</p>
-          </article>
+          </details>
         </div>
       </div>
     </section>

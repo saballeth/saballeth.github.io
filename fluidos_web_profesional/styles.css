@@ -118,6 +118,21 @@ h3 { font-size: 1.35rem; }
 
 /* slight alignment tweak: ensure main content aligns with site header width like other pages */
 .container { max-width: var(--max); padding-left: 1rem; padding-right: 1rem; }
+
+/* details/summary (collapsible) styling */
+details summary {
+  list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: 1rem; border-radius: 12px; background: transparent; border: 1px solid transparent;
+}
+details summary h3 { margin: 0; font-size: 1.05rem; }
+details summary::after { content: '▾'; color: var(--muted); transform: rotate(0); transition: transform .18s ease; }
+details[open] summary::after { transform: rotate(180deg); }
+
+.section-controls { margin-top: .6rem; display:flex; gap:.5rem; }
+.btn.small { padding: .4rem .7rem; border-radius: 10px; font-size: .85rem; }
+
+/* reduce visual density inside collapsed blocks */
+details .card, details .vars, details .figure, details .formula-card { margin-top: .6rem; }
 .inline-eq { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:#dff5ff; }
 .section { padding: 4.4rem 0; }
 .section.alt { background: rgba(255,255,255,.03); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }

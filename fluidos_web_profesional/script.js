@@ -347,3 +347,18 @@ function enhanceUI() {
     s.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); s.parentElement.toggleAttribute('open'); } });
   });
 }
+
+function setSectionOpen(sectionId, open) {
+  const sec = document.getElementById(sectionId);
+  if (!sec) return;
+  sec.querySelectorAll('details').forEach(d => {
+    if (open) d.setAttribute('open', ''); else d.removeAttribute('open');
+  });
+}
+
+function expandSection(sectionId) { setSectionOpen(sectionId, true); }
+function collapseSection(sectionId) { setSectionOpen(sectionId, false); }
+
+// convenience global handlers
+window.expandSection = expandSection;
+window.collapseSection = collapseSection;
