@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viscosidad, Reynolds, Poiseuille y Stokes</title>
+  <meta name="description" content="Recurso académico interactivo sobre viscosidad, número de Reynolds, ecuación de Poiseuille y ley de Stokes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero" id="inicio">
+    <nav class="nav container">
+      <div class="brand">
+        <div class="brand-mark">μ</div>
+        <div>
+          <strong>Fluidos Viscosos</strong>
+          <span>Recurso académico interactivo</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#teoria">Teoría</a>
+        <a href="#ejercicios">Ejercicios</a>
+        <a href="#calculadoras">Interactivos</a>
+        <a href="#laboratorios">Laboratorios</a>
+        <a href="#referencias">Referencias</a>
+      </div>
+    </nav>
+
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Mecánica de fluidos · Transporte de cantidad de movimiento</span>
+        <h1>Viscosidad, Reynolds, Poiseuille y Stokes</h1>
+        <p class="lead">
+          Página web académica diseñada como apoyo didáctico para analizar el papel de la viscosidad,
+          identificar regímenes de flujo, modelar el caudal en conductos circulares y estudiar la sedimentación de partículas.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#calculadoras">Ir a calculadoras</a>
+          <a class="btn btn-secondary" href="#laboratorios">Explorar laboratorios</a>
+        </div>
+        <ul class="hero-bullets">
+          <li>Teoría con ecuaciones y variables en SI</li>
+          <li>Ejercicios resueltos con interpretación física</li>
+          <li>Calculadoras y laboratorios virtuales dinámicos</li>
+        </ul>
+      </div>
+      <div class="hero-card card">
+        <div class="metric-grid">
+          <div class="metric">
+            <span>Reynolds (ejemplo)</span>
+            <strong>540</strong>
+            <small>Flujo laminar</small>
+          </div>
+          <div class="metric">
+            <span>ΔP (ejemplo)</span>
+            <strong>254.6 kPa</strong>
+            <small>Poiseuille en tubería</small>
+          </div>
+          <div class="metric">
+            <span>Validez Stokes</span>
+            <strong>No</strong>
+            <small>para D = 50 mm en agua</small>
+          </div>
+        </div>
+        <div class="formula-card">
+          <p class="formula-title">Ecuaciones clave</p>
+          <div class="equation">Re = ρVD / μ</div>
+          <div class="equation">Q = πR⁴ΔP / (8μL)</div>
+          <div class="equation">v<sub>t</sub> = (2r²(ρ<sub>p</sub> − ρ<sub>f</sub>)g) / (9μ)</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section container" id="teoria">
+      <div class="section-heading">
+        <span class="tag">A. Sección teórica</span>
+        <h2>Fundamentos</h2>
+        <p>Cada tema incluye explicación conceptual, ecuaciones, variables en SI y figuras propias para uso didáctico.</p>
+      </div>
+
+      <div class="topic-grid">
+        <article class="card topic">
+          <h3>1. Viscosidad</h3>
+          <p>
+            La <strong>viscosidad dinámica</strong> μ cuantifica la resistencia interna del fluido a deformarse por esfuerzo cortante.
+            En un fluido newtoniano, el esfuerzo cortante es proporcional al gradiente de velocidad: <span class="inline-eq">τ = μ (du/dy)</span>.
+            Su unidad SI es <strong>Pa·s</strong> (equivalente a N·s/m² o kg/(m·s)).
+          </p>
+          <p>
+            La <strong>viscosidad cinemática</strong> ν relaciona la difusión de cantidad de movimiento con la densidad:
+            <span class="inline-eq">ν = μ/ρ</span>, con unidades <strong>m²/s</strong>.
+            Mientras μ mide fricción interna absoluta, ν mide el efecto viscoso relativo a la inercia del fluido.
+          </p>
+          <p>
+            En el <strong>flujo de Couette</strong> entre dos placas paralelas, una fija y otra en movimiento, el perfil de velocidad es lineal si no hay gradiente de presión:
+            <span class="inline-eq">u(y) = Uy/h</span>. El gradiente de velocidad es constante y, por tanto, el esfuerzo cortante también lo es.
+          </p>
+
+          <figure class="figure">
+            <svg viewBox="0 0 640 220" aria-label="Esquema de flujo de Couette">
+              <defs>
+                <marker id="arrowA" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L9,3 z" fill="currentColor"></path>
+                </marker>
+              </defs>
+              <rect x="70" y="40" width="500" height="18" rx="6" class="plate"></rect>
+              <rect x="70" y="160" width="500" height="18" rx="6" class="plate"></rect>
+              <g class="flow-lines">
+                <line x1="120" y1="145" x2="180" y2="145" />
+                <line x1="120" y1="125" x2="220" y2="125" />
+                <line x1="120" y1="105" x2="270" y2="105" />
+                <line x1="120" y1="85" x2="330" y2="85" />
+                <line x1="120" y1="65" x2="390" y2="65" />
+              </g>
+              <line x1="450" y1="28" x2="540" y2="28" class="accent-line" marker-end="url(#arrowA)"></line>
+              <text x="548" y="32" class="svg-label">Placa móvil, velocidad U</text>
+              <text x="75" y="196" class="svg-label">Placa fija</text>
+              <text x="75" y="28" class="svg-label">Flujo de Couette: perfil lineal u(y)</text>
+            </svg>
+            <figcaption>Figura 1. Esquema propio del flujo de Couette entre placas paralelas.</figcaption>
+          </figure>
+
+          <div class="vars">
+            <h4>Variables principales</h4>
+            <ul>
+              <li><strong>τ</strong>: esfuerzo cortante [Pa]</li>
+              <li><strong>μ</strong>: viscosidad dinámica [Pa·s]</li>
+              <li><strong>ν</strong>: viscosidad cinemática [m²/s]</li>
+              <li><strong>ρ</strong>: densidad [kg/m³]</li>
+              <li><strong>u</strong>: velocidad [m/s]</li>
+              <li><strong>y</strong>: coordenada transversal [m]</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card topic">
+          <h3>2. Número de Reynolds</h3>
+          <p>
+            El número de Reynolds es un parámetro adimensional que compara las fuerzas inerciales con las fuerzas viscosas:
+            <span class="inline-eq">Re = ρVD/μ = VD/ν</span>.
+            Valores pequeños indican dominancia viscosa; valores altos indican dominancia inercial.
+          </p>
+          <p>
+            En tuberías circulares, se suele clasificar el régimen como <strong>laminar</strong> para <span class="inline-eq">Re &lt; 2300</span>,
+            <strong>de transición</strong> para <span class="inline-eq">2300 ≤ Re ≤ 4000</span> y <strong>turbulento</strong> para <span class="inline-eq">Re &gt; 4000</span>.
+            La transición real depende de rugosidad, perturbaciones y condiciones de entrada.
+          </p>
+
+          <figure class="figure">
+            <svg viewBox="0 0 640 250" aria-label="Regímenes de flujo según Reynolds">
+              <rect x="60" y="85" width="170" height="70" rx="16" class="reg-lam"></rect>
+              <rect x="235" y="85" width="170" height="70" rx="16" class="reg-trans"></rect>
+              <rect x="410" y="85" width="170" height="70" rx="16" class="reg-turb"></rect>
+              <text x="120" y="125" class="svg-title">Laminar</text>
+              <text x="110" y="147" class="svg-label">Re &lt; 2300</text>
+              <text x="282" y="125" class="svg-title">Transición</text>
+              <text x="265" y="147" class="svg-label">2300 ≤ Re ≤ 4000</text>
+              <text x="470" y="125" class="svg-title">Turbulento</text>
+              <text x="470" y="147" class="svg-label">Re &gt; 4000</text>
+              <line x1="70" y1="190" x2="570" y2="190" class="axis-line"></line>
+              <text x="70" y="214" class="svg-label">Dominio viscoso</text>
+              <text x="503" y="214" class="svg-label">Dominio inercial</text>
+            </svg>
+            <figcaption>Figura 2. Diagrama conceptual propio de regímenes de flujo en tuberías según el número de Reynolds.</figcaption>
+          </figure>
+
+          <div class="vars">
+            <h4>Variables principales</h4>
+            <ul>
+              <li><strong>Re</strong>: número de Reynolds [adimensional]</li>
+              <li><strong>V</strong>: velocidad media [m/s]</li>
+              <li><strong>D</strong>: diámetro interno [m]</li>
+              <li><strong>ρ</strong>: densidad [kg/m³]</li>
+              <li><strong>μ</strong>: viscosidad dinámica [Pa·s]</li>
+              <li><strong>ν</strong>: viscosidad cinemática [m²/s]</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card topic">
+          <h3>3. Ecuación de Poiseuille</h3>
+          <p>
+            Para flujo laminar, estacionario, plenamente desarrollado, incomprensible y newtoniano en un conducto cilíndrico,
+            la ecuación de Hagen–Poiseuille relaciona caudal y caída de presión como:
+          </p>
+          <div class="equation-block">Q = (πR⁴ΔP) / (8μL)</div>
+          <p>
+            El perfil axial de velocidad es parabólico:
+            <span class="inline-eq">u(r) = (ΔP/(4μL))(R² − r²)</span>.
+            La resistencia hidráulica escala como <span class="inline-eq">1/R⁴</span>, de modo que pequeños cambios en el radio modifican fuertemente el caudal.
+          </p>
+
+          <figure class="figure">
+            <svg viewBox="0 0 640 270" aria-label="Perfil parabólico de Poiseuille">
+              <line x1="70" y1="210" x2="580" y2="210" class="axis-line"></line>
+              <line x1="160" y1="40" x2="160" y2="230" class="axis-line"></line>
+              <text x="585" y="214" class="svg-label">r</text>
+              <text x="130" y="50" class="svg-label">u(r)</text>
+              <path d="M160 60 C230 75, 300 120, 320 210 C340 120, 410 75, 480 60" class="curve"></path>
+              <line x1="320" y1="50" x2="320" y2="210" class="dashed"></line>
+              <text x="285" y="42" class="svg-label">uₘₐₓ</text>
+              <text x="147" y="228" class="svg-label">−R</text>
+              <text x="316" y="228" class="svg-label">0</text>
+              <text x="470" y="228" class="svg-label">R</text>
+              <text x="180" y="26" class="svg-label">Perfil parabólico del flujo laminar en tubería</text>
+            </svg>
+            <figcaption>Figura 3. Perfil parabólico propio de velocidad u(r) en flujo laminar tipo Poiseuille.</figcaption>
+          </figure>
+
+          <div class="vars">
+            <h4>Variables principales</h4>
+            <ul>
+              <li><strong>Q</strong>: caudal volumétrico [m³/s]</li>
+              <li><strong>ΔP</strong>: caída de presión [Pa]</li>
+              <li><strong>R</strong>: radio interno [m]</li>
+              <li><strong>L</strong>: longitud de tubería [m]</li>
+              <li><strong>μ</strong>: viscosidad dinámica [Pa·s]</li>
+              <li><strong>u(r)</strong>: velocidad axial local [m/s]</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card topic">
+          <h3>4. Ley de Stokes y sedimentación</h3>
+          <p>
+            Una partícula esférica que cae en un fluido viscoso experimenta tres fuerzas principales:
+            <strong>peso</strong>, <strong>empuje</strong> y <strong>arrastre viscoso</strong>.
+            A velocidad terminal, la suma de fuerzas es cero.
+          </p>
+          <p>
+            Para números de Reynolds de partícula muy pequeños (<span class="inline-eq">Re<sub>p</sub> ≪ 1</span>), el arrastre puede aproximarse con la ley de Stokes:
+            <span class="inline-eq">F<sub>D</sub> = 6πμrv</span>.
+            De allí se obtiene la velocidad terminal:
+          </p>
+          <div class="equation-block">v<sub>t</sub> = [2r²(ρ<sub>p</sub> − ρ<sub>f</sub>)g] / (9μ)</div>
+          <p>
+            La validez exige partícula pequeña, fluido newtoniano, baja inercia y ausencia de efectos significativos de pared o interacción entre partículas.
+          </p>
+
+          <figure class="figure">
+            <svg viewBox="0 0 640 280" aria-label="Fuerzas sobre esfera sedimentando">
+              <defs>
+                <marker id="arrowB" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L9,3 z" fill="currentColor"></path>
+                </marker>
+              </defs>
+              <circle cx="320" cy="145" r="45" class="sphere"></circle>
+              <line x1="320" y1="40" x2="320" y2="95" class="up-force" marker-end="url(#arrowB)"></line>
+              <line x1="420" y1="145" x2="360" y2="145" class="up-force" marker-end="url(#arrowB)"></line>
+              <line x1="320" y1="190" x2="320" y2="245" class="down-force" marker-end="url(#arrowB)"></line>
+              <text x="332" y="65" class="svg-label">Empuje, E</text>
+              <text x="422" y="139" class="svg-label">Arrastre, Fᴅ</text>
+              <text x="332" y="235" class="svg-label">Peso, W</text>
+              <text x="220" y="40" class="svg-label">Equilibrio dinámico a velocidad terminal</text>
+            </svg>
+            <figcaption>Figura 4. Esquema propio de fuerzas sobre una esfera que sedimenta en un fluido viscoso.</figcaption>
+          </figure>
+
+          <div class="vars">
+            <h4>Variables principales</h4>
+            <ul>
+              <li><strong>v<sub>t</sub></strong>: velocidad terminal [m/s]</li>
+              <li><strong>r</strong>: radio de partícula [m]</li>
+              <li><strong>ρ<sub>p</sub></strong>: densidad de la partícula [kg/m³]</li>
+              <li><strong>ρ<sub>f</sub></strong>: densidad del fluido [kg/m³]</li>
+              <li><strong>μ</strong>: viscosidad dinámica [Pa·s]</li>
+              <li><strong>Re<sub>p</sub></strong>: número de Reynolds de partícula [adimensional]</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section alt" id="ejercicios">
+      <div class="container">
+        <div class="section-heading">
+          <span class="tag">B. Ejercicios resueltos</span>
+          <h2>Aplicación de modelos</h2>
+          <p>Se presentan datos, modelo, desarrollo, cálculo numérico, verificación dimensional e interpretación física.</p>
+        </div>
+
+        <div class="accordion-grid">
+          <details class="card solution" open>
+            <summary>Ejercicio 1. Cálculo del régimen con el número de Reynolds</summary>
+            <div class="solution-body">
+              <p><strong>Datos:</strong> ρ = 900 kg/m³, μ = 0.05 Pa·s, D = 0.02 m, V = 1.5 m/s.</p>
+              <p><strong>Modelo:</strong> <span class="inline-eq">Re = ρVD/μ</span>.</p>
+              <p><strong>Desarrollo:</strong> <span class="inline-eq">Re = (900)(1.5)(0.02)/(0.05) = 540</span>.</p>
+              <p><strong>Verificación dimensional:</strong> [kg/m³ · m/s · m] / [kg/(m·s)] = 1, por tanto Re es adimensional.</p>
+              <p><strong>Resultado:</strong> <span class="result-pill">Re = 540</span></p>
+              <p><strong>Interpretación física:</strong> como Re &lt; 2300, el flujo se encuentra en <strong>régimen laminar</strong>.
+              Predominan los efectos viscosos y el movimiento del fluido tiende a ser ordenado, con trayectorias suaves y estables.</p>
+            </div>
+          </details>
+
+          <details class="card solution">
+            <summary>Ejercicio 2. Caída de presión requerida (Poiseuille)</summary>
+            <div class="solution-body">
+              <p><strong>Datos:</strong> μ = 0.2 Pa·s, L = 50 m, R = 0.01 m, Q = 0.1 L/s = 1.0×10<sup>−4</sup> m³/s.</p>
+              <p><strong>Modelo:</strong> <span class="inline-eq">ΔP = 8μLQ/(πR⁴)</span>.</p>
+              <p><strong>Desarrollo:</strong> <span class="inline-eq">ΔP = 8(0.2)(50)(1.0×10<sup>−4</sup>)/(π(0.01)⁴)</span>.</p>
+              <p><strong>Resultado numérico:</strong> <span class="result-pill">ΔP = 254,648 Pa</span> ≈ <span class="result-pill">254.6 kPa</span></p>
+              <p><strong>Verificación dimensional:</strong> [Pa·s · m · m³/s]/m⁴ = Pa.</p>
+              <p><strong>Interpretación física:</strong> la caída de presión es elevada porque la resistencia hidráulica depende de <span class="inline-eq">1/R⁴</span>.
+              Reducir ligeramente el radio incrementa notablemente la energía necesaria para bombear el fluido.</p>
+            </div>
+          </details>
+
+          <details class="card solution">
+            <summary>Ejercicio 3. Velocidad terminal de sedimentación (Stokes)</summary>
+            <div class="solution-body">
+              <p><strong>Datos:</strong> ρ<sub>p</sub> = 2650 kg/m³, ρ<sub>f</sub> = 997 kg/m³, μ = 1.002×10<sup>−3</sup> Pa·s, D = 50 mm = 0.05 m, r = 0.025 m.</p>
+              <p><strong>Modelo:</strong> <span class="inline-eq">v<sub>t</sub> = 2r²(ρ<sub>p</sub>−ρ<sub>f</sub>)g/(9μ)</span>.</p>
+              <p><strong>Cálculo con Stokes:</strong> <span class="inline-eq">v<sub>t</sub> ≈ 2,248 m/s</span>.</p>
+              <p><strong>Número de Reynolds de partícula:</strong> <span class="inline-eq">Re<sub>p</sub> = ρ<sub>f</sub>v<sub>t</sub>D/μ ≈ 1.12e+08</span>.</p>
+              <p><strong>Verificación dimensional:</strong> [m²·kg/m³·m/s²]/[kg/(m·s)] = m/s.</p>
+              <p><strong>Interpretación física:</strong> aunque la sustitución algebraica produce un valor de velocidad, el resultado <strong>no es físicamente válido dentro de la ley de Stokes</strong>,
+              porque el criterio de aplicabilidad requiere <span class="inline-eq">Re<sub>p</sub> ≪ 1</span> y aquí el valor es enorme. Esto sugiere que el diámetro dado (50 mm) no corresponde al régimen de Stokes.
+              Si el enunciado pretendía una <em>microesfera</em> de 50 μm, entonces se obtendría <span class="inline-eq">v<sub>t</sub> ≈ 0.002 m/s</span> y <span class="inline-eq">Re<sub>p</sub> ≈ 0.112</span>, condición de borde; es un escenario mucho más razonable que 50 mm, pero todavía conviene advertir que Re<sub>p</sub> no es mucho menor que 1.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="calculadoras">
+      <div class="section-heading">
+        <span class="tag">C. Ejercicios interactivos</span>
+        <h2>Calculadoras académicas</h2>
+        <p>Ingrese datos en unidades SI para obtener resultados, clasificación de régimen y chequeos de validez.</p>
+      </div>
+
+      <div class="calc-grid">
+        <article class="card calc-card">
+          <h3>Calculadora de Reynolds</h3>
+          <div class="form-grid">
+            <label>ρ [kg/m³]<input id="re-rho" type="number" step="any" value="900"></label>
+            <label>μ [Pa·s]<input id="re-mu" type="number" step="any" value="0.05"></label>
+            <label>D [m]<input id="re-d" type="number" step="any" value="0.02"></label>
+            <label>V [m/s]<input id="re-v" type="number" step="any" value="1.5"></label>
+          </div>
+          <button class="btn btn-primary full" onclick="calcRe()">Calcular Re</button>
+          <div id="re-output" class="output"></div>
+        </article>
+
+        <article class="card calc-card">
+          <h3>Calculadora de Poiseuille</h3>
+          <div class="form-grid">
+            <label>μ [Pa·s]<input id="poi-mu" type="number" step="any" value="0.2"></label>
+            <label>L [m]<input id="poi-l" type="number" step="any" value="50"></label>
+            <label>R [m]<input id="poi-r" type="number" step="any" value="0.01"></label>
+            <label>Q [m³/s]<input id="poi-q" type="number" step="any" value="0.0001"></label>
+          </div>
+          <button class="btn btn-primary full" onclick="calcPoiseuille()">Calcular ΔP</button>
+          <div id="poi-output" class="output"></div>
+        </article>
+
+        <article class="card calc-card">
+          <h3>Calculadora de Stokes</h3>
+          <div class="form-grid">
+            <label>ρ<sub>p</sub> [kg/m³]<input id="st-rhop" type="number" step="any" value="2650"></label>
+            <label>ρ<sub>f</sub> [kg/m³]<input id="st-rhof" type="number" step="any" value="997"></label>
+            <label>μ [Pa·s]<input id="st-mu" type="number" step="any" value="0.001002"></label>
+            <label>D [m]<input id="st-d" type="number" step="any" value="0.00005"></label>
+          </div>
+          <button class="btn btn-primary full" onclick="calcStokes()">Calcular v<sub>t</sub> y Re<sub>p</sub></button>
+          <div id="st-output" class="output"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section alt" id="laboratorios">
+      <div class="container">
+        <div class="section-heading">
+          <span class="tag">D. Laboratorios virtuales</span>
+          <h2>Exploración paramétrica con controles y gráficas</h2>
+          <p>Use los deslizadores para observar tendencias, sensibilidad de parámetros y rango de validez de los modelos.</p>
+        </div>
+
+        <div class="lab-grid">
+          <article class="card lab-card">
+            <div class="lab-head">
+              <div>
+                <h3>Laboratorio 1. Flujo de Poiseuille</h3>
+                <p>Variación de radio, viscosidad, longitud y caída de presión.</p>
+              </div>
+              <div class="mini-badge">Perfil u(r) + caudal Q</div>
+            </div>
+
+            <div class="slider-grid">
+              <label>Radio R [m] <span id="lab1-r-val">0.010</span>
+                <input id="lab1-r" type="range" min="0.002" max="0.030" step="0.001" value="0.010" oninput="updateLabPoiseuille()">
+              </label>
+              <label>Viscosidad μ [Pa·s] <span id="lab1-mu-val">0.200</span>
+                <input id="lab1-mu" type="range" min="0.010" max="1.000" step="0.010" value="0.200" oninput="updateLabPoiseuille()">
+              </label>
+              <label>Caída de presión ΔP [Pa] <span id="lab1-dp-val">800000</span>
+                <input id="lab1-dp" type="range" min="1000" max="2000000" step="1000" value="800000" oninput="updateLabPoiseuille()">
+              </label>
+              <label>Longitud L [m] <span id="lab1-l-val">50.0</span>
+                <input id="lab1-l" type="range" min="1" max="100" step="1" value="50" oninput="updateLabPoiseuille()">
+              </label>
+            </div>
+
+            <div class="lab-results" id="lab1-results"></div>
+            <canvas id="lab1-canvas" width="760" height="360"></canvas>
+            <p class="caption">Figura 5. Gráfico dinámico propio del perfil parabólico de velocidad u(r) en función del radio.</p>
+          </article>
+
+          <article class="card lab-card">
+            <div class="lab-head">
+              <div>
+                <h3>Laboratorio 2. Sedimentación de Stokes</h3>
+                <p>Variación de tamaño de partícula, viscosidad y altura de caída.</p>
+              </div>
+              <div class="mini-badge">v<sub>t</sub> + tiempo + Re<sub>p</sub></div>
+            </div>
+
+            <div class="slider-grid">
+              <label>Diámetro D [μm] <span id="lab2-d-val">50</span>
+                <input id="lab2-d" type="range" min="5" max="500" step="1" value="50" oninput="updateLabStokes()">
+              </label>
+              <label>Viscosidad μ [Pa·s] <span id="lab2-mu-val">0.0010</span>
+                <input id="lab2-mu" type="range" min="0.0005" max="0.0500" step="0.0005" value="0.0010" oninput="updateLabStokes()">
+              </label>
+              <label>Densidad partícula ρ<sub>p</sub> [kg/m³] <span id="lab2-rhop-val">2650</span>
+                <input id="lab2-rhop" type="range" min="1000" max="8000" step="50" value="2650" oninput="updateLabStokes()">
+              </label>
+              <label>Altura de caída h [m] <span id="lab2-h-val">1.00</span>
+                <input id="lab2-h" type="range" min="0.10" max="5.00" step="0.10" value="1.00" oninput="updateLabStokes()">
+              </label>
+            </div>
+
+            <div class="lab-results" id="lab2-results"></div>
+            <canvas id="lab2-canvas" width="760" height="360"></canvas>
+            <p class="caption">Figura 6. Gráfico dinámico propio de sensibilidad de la velocidad terminal y del tiempo de sedimentación.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="referencias">
+      <div class="section-heading">
+        <span class="tag">E. Reproducibilidad y citación</span>
+        <h2>Herramientas, validación y referencias</h2>
+      </div>
+
+      <div class="ref-grid">
+        <article class="card">
+          <h3>Herramientas empleadas</h3>
+          <ul class="clean-list">
+            <li>HTML5, CSS3 y JavaScript vainilla para garantizar portabilidad.</li>
+            <li>SVG y Canvas para figuras y gráficos propios.</li>
+            <li>Diseño responsivo para visualización en computador, tableta y móvil.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Uso de IA y verificación</h3>
+          <p>
+            Esta página puede declarar que la estructura base, parte del estilo visual y funciones interactivas fueron asistidas por IA.
+            No obstante, las ecuaciones, unidades, resultados numéricos, supuestos y textos académicos deben ser <strong>verificados y corregidos manualmente</strong> por el estudiante antes de la entrega.
+          </p>
+        </article>
+
+        <article class="card refs-card">
+          <h3>Referencias sugeridas</h3>
+          <ol>
+            <li>Çengel, Y. A., & Cimbala, J. M. <em>Mecánica de Fluidos: Fundamentos y Aplicaciones</em>. McGraw-Hill.</li>
+            <li>Fox, R. W., McDonald, A. T., Pritchard, P. J., & Leylegian, J. C. <em>Introducción a la Mecánica de Fluidos</em>. Wiley.</li>
+            <li>Munson, B. R., Young, D. F., Okiishi, T. H., & Huebsch, W. W. <em>Fundamentos de Mecánica de Fluidos</em>. Wiley.</li>
+            <li>White, F. M. <em>Fluid Mechanics</em>. McGraw-Hill.</li>
+          </ol>
+          <p class="small-note">Todas las figuras de esta página fueron elaboradas como material propio con fines didácticos.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <strong>Fluidos Viscosos</strong>
+        <p>Material académico interactivo sobre viscosidad, Reynolds, Poiseuille y Stokes.</p>
+      </div>
+      <a href="#inicio" class="back-top">Volver arriba ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
