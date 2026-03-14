@@ -68,9 +68,9 @@
         </div>
         <div class="formula-card">
           <p class="formula-title">Ecuaciones clave</p>
-          <div class="equation">Re = ρVD / μ</div>
-          <div class="equation">Q = πR⁴ΔP / (8μL)</div>
-          <div class="equation">v<sub>t</sub> = (2r²(ρ<sub>p</sub> − ρ<sub>f</sub>)g) / (9μ)</div>
+          <div class="equation" data-tex="Re = \\rho V D / \\mu"></div>
+          <div class="equation" data-tex="Q = \\frac{\\pi R^{4} \\Delta P}{8 \\mu L}"></div>
+          <div class="equation" data-tex="v_{t} = \\frac{2 r^{2} (\\rho_{p} - \\rho_{f}) g}{9 \\mu}"></div>
         </div>
       </div>
     </div>
@@ -93,17 +93,17 @@
           <summary><h3>1. Viscosidad</h3></summary>
           <p>
             La <strong>viscosidad dinámica</strong> μ cuantifica la resistencia interna del fluido a deformarse por esfuerzo cortante.
-            En un fluido newtoniano, el esfuerzo cortante es proporcional al gradiente de velocidad: <span class="inline-eq">τ = μ (du/dy)</span>.
+            En un fluido newtoniano, el esfuerzo cortante es proporcional al gradiente de velocidad: <span class="inline-eq" data-tex="\\tau = \\mu \\frac{du}{dy}"></span>.
             Su unidad SI es <strong>Pa·s</strong> (equivalente a N·s/m² o kg/(m·s)).
           </p>
           <p>
             La <strong>viscosidad cinemática</strong> ν relaciona la difusión de cantidad de movimiento con la densidad:
-            <span class="inline-eq">ν = μ/ρ</span>, con unidades <strong>m²/s</strong>.
+            <span class="inline-eq" data-tex="\\nu = \\frac{\\mu}{\\rho}"></span>, con unidades <strong>m²/s</strong>.
             Mientras μ mide fricción interna absoluta, ν mide el efecto viscoso relativo a la inercia del fluido.
           </p>
           <p>
             En el <strong>flujo de Couette</strong> entre dos placas paralelas, una fija y otra en movimiento, el perfil de velocidad es lineal si no hay gradiente de presión:
-            <span class="inline-eq">u(y) = Uy/h</span>. El gradiente de velocidad es constante y, por tanto, el esfuerzo cortante también lo es.
+            <span class="inline-eq" data-tex="u(y) = \\frac{U y}{h}"></span>. El gradiente de velocidad es constante y, por tanto, el esfuerzo cortante también lo es.
           </p>
 
           <figure class="figure">
@@ -147,7 +147,7 @@
           <summary><h3>2. Número de Reynolds</h3></summary>
           <p>
             El número de Reynolds es un parámetro adimensional que compara las fuerzas inerciales con las fuerzas viscosas:
-            <span class="inline-eq">Re = ρVD/μ = VD/ν</span>.
+            <span class="inline-eq" data-tex="Re = \\frac{\\rho V D}{\\mu} = \\frac{V D}{\\nu}"></span>.
             Valores pequeños indican dominancia viscosa; valores altos indican dominancia inercial.
           </p>
           <p>
@@ -193,10 +193,10 @@
             Para flujo laminar, estacionario, plenamente desarrollado, incomprensible y newtoniano en un conducto cilíndrico,
             la ecuación de Hagen–Poiseuille relaciona caudal y caída de presión como:
           </p>
-          <div class="equation-block">Q = (πR⁴ΔP) / (8μL)</div>
+          <div class="equation-block" data-tex="Q = \\frac{\\pi R^{4} \\Delta P}{8 \\mu L}"></div>
           <p>
             El perfil axial de velocidad es parabólico:
-            <span class="inline-eq">u(r) = (ΔP/(4μL))(R² − r²)</span>.
+            <span class="inline-eq" data-tex="u(r) = \\frac{\\Delta P}{4 \\mu L} (R^{2} - r^{2})"></span>.
             La resistencia hidráulica escala como <span class="inline-eq">1/R⁴</span>, de modo que pequeños cambios en el radio modifican fuertemente el caudal.
           </p>
 
@@ -238,11 +238,11 @@
             A velocidad terminal, la suma de fuerzas es cero.
           </p>
           <p>
-            Para números de Reynolds de partícula muy pequeños (<span class="inline-eq">Re<sub>p</sub> ≪ 1</span>), el arrastre puede aproximarse con la ley de Stokes:
-            <span class="inline-eq">F<sub>D</sub> = 6πμrv</span>.
+            Para números de Reynolds de partícula muy pequeños (<span class="inline-eq" data-tex="Re_{p} \\ll 1"></span>), el arrastre puede aproximarse con la ley de Stokes:
+            <span class="inline-eq" data-tex="F_{D} = 6 \\pi \\mu r v"></span>.
             De allí se obtiene la velocidad terminal:
           </p>
-          <div class="equation-block">v<sub>t</sub> = [2r²(ρ<sub>p</sub> − ρ<sub>f</sub>)g] / (9μ)</div>
+          <div class="equation-block" data-tex="v_{t} = \\frac{2 r^{2} (\\rho_{p} - \\rho_{f}) g}{9 \\mu}"></div>
           <p>
             La validez exige partícula pequeña, fluido newtoniano, baja inercia y ausencia de efectos significativos de pared o interacción entre partículas.
           </p>

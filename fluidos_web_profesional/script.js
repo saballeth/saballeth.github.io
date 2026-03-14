@@ -422,9 +422,10 @@ function texifyHTMLFragment(html) {
 function renderEquationsWithKaTeX() {
   document.querySelectorAll('.equation, .equation-block, .inline-eq').forEach(el => {
     try {
-      const src = el.innerHTML;
-      const tex = texifyHTMLFragment(src);
-      const display = el.classList.contains('equation-block') || el.classList.contains('equation');
+      let tex = null;
+      if (el.dataset && el.dataset.tex) tex = el.dataset.tex;
+      else tex = texifyHTMLFragment(el.innerHTML || el.textContent || '');
+      const display = el.classList.contains('equation-block');
       katex.render(tex, el, { throwOnError: false, displayMode: display });
     } catch (e) { /* fail silently */ }
   });
