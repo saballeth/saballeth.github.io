@@ -372,26 +372,50 @@ window.collapseSection = collapseSection;
 /* --- KaTeX rendering helpers --- */
 function texifyHTMLFragment(html) {
   let s = html;
-  // convert sub/sup tags
+  // preserve sub/sup by converting tags first
   s = s.replace(/<sub>(.*?)<\/sub>/g, '_{$1}');
-  s = s.replace(/<sup>(.*?)<\/sup>/g, '^{$1}');
-  // unicode superscripts
-  const supMap = { '\u00B2':'2','\u00B3':'3','\u2074':'4','\u2075':'5','\u2076':'6','\u2077':'7','\u2078':'8','\u2079':'9','\u2070':'0' };
-  Object.keys(supMap).forEach(k => { s = s.replace(new RegExp(k,'g'), '^{' + supMap[k] + '}'); });
-  // greek letters
-  s = s.replace(/ρ/g,'\\rho').replace(/μ/g,'\\mu').replace(/ν/g,'\\nu').replace(/π/g,'\\pi').replace(/Δ/g,'\\Delta');
-  // remove remaining HTML tags
-  s = s.replace(/<[^>]+>/g,'');
-  // simple fraction heuristic: split on ' / ' when parentheses on denom
-  if (/\/(.*)/.test(s) && /\/.*/.test(s)) {
-    const parts = s.split('/');
-    if (parts.length === 2) {
-      const num = parts[0].trim();
-      let den = parts[1].trim();
-      if (den.startsWith('(') && den.endsWith(')')) den = den.slice(1,-1).trim();
-      s = '\\frac{' + num + '}{' + den + '}';
+  s = s.replace(/<sup>(.*?)<\/sup>/g, '^{ $1 }');
+
+  // collapse tags to text
+  s = s.replace(/<[^>]+>/g, '');
+  s = s.replace(/\u00A0/g, ' ');
+
+  // map unicode superscripts (² ³ ⁴ etc) to ^{n}
+  const uniSup = { '²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁰':'0' };
+  Object.keys(uniSup).forEach(ch => { s = s.replace(new RegExp(ch,'g'), '^{' + uniSup[ch] + '}'); });
+
+  // convert common symbols to TeX
+  s = s.replace(/π/g,'\\pi').replace(/Δ/g,'\\Delta');
+  s = s.replace(/ρ/g,'\\rho').replace(/μ/g,'\\mu').replace(/ν/g,'\\nu');
+
+  // normalize whitespace
+  s = s.replace(/\s+/g, ' ').trim();
+
+  // if there's an equals sign, only attempt fraction-conversion on RHS
+  if (s.includes('=')) {
+    const parts = s.split('=');
+    const lhs = parts.shift().trim();
+    let rhs = parts.join('=').trim();
+    // single slash -> fraction
+    const slashCount = (rhs.match(/\//g) || []).length;
+    if (slashCount === 1) {
+      const [num, den] = rhs.split('/').map(p => p.trim());
+      const n = num.replace(/^\(|\)$/g,'');
+      let d = den.replace(/^\(|\)$/g,'');
+      rhs = '\\frac{' + n + '}{' + d + '}';
     }
+    return lhs + ' = ' + rhs;
   }
+
+  // if no '=', still try a single fraction replacement
+  const slashCount = (s.match(/\//g) || []).length;
+  if (slashCount === 1) {
+    const [num, den] = s.split('/').map(p => p.trim());
+    const n = num.replace(/^\(|\)$/g,'');
+    let d = den.replace(/^\(|\)$/g,'');
+    return '\\frac{' + n + '}{' + d + '}';
+  }
+
   return s;
 }
 
