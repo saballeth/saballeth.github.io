@@ -133,6 +133,16 @@ details[open] summary::after { transform: rotate(180deg); }
 
 /* reduce visual density inside collapsed blocks */
 details .card, details .vars, details .figure, details .formula-card { margin-top: .6rem; }
+
+/* canvas tooltip */
+.canvas-tooltip {
+  position: fixed; pointer-events: none; background: rgba(6,17,27,0.92); color: var(--text);
+  padding: .4rem .6rem; border-radius: 8px; font-size: .85rem; border:1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35); z-index: 9999; transform: translate(-50%, -120%);
+}
+
+.equation-block { font-size: 1.05rem; }
+.equation { font-size: 1rem; }
 .inline-eq { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:#dff5ff; }
 .section { padding: 4.4rem 0; }
 .section.alt { background: rgba(255,255,255,.03); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }

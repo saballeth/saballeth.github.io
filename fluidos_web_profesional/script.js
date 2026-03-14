@@ -324,12 +324,6 @@ function addCopyButtonTo(node) {
 }
 
 function enhanceUI() {
-  // add copy buttons to equation blocks
-  document.querySelectorAll('.equation, .equation-block').forEach(el => {
-    // avoid adding multiple
-    if (!el.querySelector('.copy-btn')) addCopyButtonTo(el);
-  });
-
   // smooth scroll for internal nav links
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', (e) => {
@@ -346,13 +340,25 @@ function enhanceUI() {
     s.setAttribute('tabindex', '0');
     s.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); s.parentElement.toggleAttribute('open'); } });
   });
+
+  // attach canvas interactions
+  attachLab1Interactions();
+  attachLab2Interactions();
+
+  // render math with KaTeX if available
+  if (window.katex) renderEquationsWithKaTeX();
+
+  // add copy buttons to equation blocks AFTER math rendering
+  document.querySelectorAll('.equation, .equation-block').forEach(el => {
+    if (!el.querySelector('.copy-btn')) addCopyButtonTo(el);
+  });
 }
 
 function setSectionOpen(sectionId, open) {
   const sec = document.getElementById(sectionId);
   if (!sec) return;
   sec.querySelectorAll('details').forEach(d => {
-    if (open) d.setAttribute('open', ''); else d.removeAttribute('open');
+    try { d.open = !!open; } catch (e) { if (open) d.setAttribute('open',''); else d.removeAttribute('open'); }
   });
 }
 
@@ -362,3 +368,90 @@ function collapseSection(sectionId) { setSectionOpen(sectionId, false); }
 // convenience global handlers
 window.expandSection = expandSection;
 window.collapseSection = collapseSection;
+
+/* --- KaTeX rendering helpers --- */
+function texifyHTMLFragment(html) {
+  let s = html;
+  // convert sub/sup tags
+  s = s.replace(/<sub>(.*?)<\/sub>/g, '_{$1}');
+  s = s.replace(/<sup>(.*?)<\/sup>/g, '^{$1}');
+  // unicode superscripts
+  const supMap = { '\u00B2':'2','\u00B3':'3','\u2074':'4','\u2075':'5','\u2076':'6','\u2077':'7','\u2078':'8','\u2079':'9','\u2070':'0' };
+  Object.keys(supMap).forEach(k => { s = s.replace(new RegExp(k,'g'), '^{' + supMap[k] + '}'); });
+  // greek letters
+  s = s.replace(/ρ/g,'\\rho').replace(/μ/g,'\\mu').replace(/ν/g,'\\nu').replace(/π/g,'\\pi').replace(/Δ/g,'\\Delta');
+  // remove remaining HTML tags
+  s = s.replace(/<[^>]+>/g,'');
+  // simple fraction heuristic: split on ' / ' when parentheses on denom
+  if (/\/(.*)/.test(s) && /\/.*/.test(s)) {
+    const parts = s.split('/');
+    if (parts.length === 2) {
+      const num = parts[0].trim();
+      let den = parts[1].trim();
+      if (den.startsWith('(') && den.endsWith(')')) den = den.slice(1,-1).trim();
+      s = '\\frac{' + num + '}{' + den + '}';
+    }
+  }
+  return s;
+}
+
+function renderEquationsWithKaTeX() {
+  document.querySelectorAll('.equation, .equation-block, .inline-eq').forEach(el => {
+    try {
+      const src = el.innerHTML;
+      const tex = texifyHTMLFragment(src);
+      const display = el.classList.contains('equation-block') || el.classList.contains('equation');
+      katex.render(tex, el, { throwOnError: false, displayMode: display });
+    } catch (e) { /* fail silently */ }
+  });
+}
+
+/* --- Canvas interactivity for labs --- */
+function ensureCanvasTooltip() {
+  let t = document.querySelector('.canvas-tooltip');
+  if (!t) { t = document.createElement('div'); t.className = 'canvas-tooltip'; document.body.appendChild(t); }
+  return t;
+}
+
+function attachLab1Interactions() {
+  const canvas = byId('lab1-canvas'); if (!canvas) return;
+  const tooltip = ensureCanvasTooltip();
+  canvas.addEventListener('mousemove', (ev) => {
+    const rect = canvas.getBoundingClientRect(); const x = ev.clientX - rect.left; const y = ev.clientY - rect.top;
+    const R = parseFloat(byId('lab1-r').value);
+    const mu = parseFloat(byId('lab1-mu').value);
+    const dP = parseFloat(byId('lab1-dp').value);
+    const L = parseFloat(byId('lab1-l').value);
+    const m = { left: 70, right: 40, top: 35, bottom: 45 };
+    const plotW = canvas.width - m.left - m.right;
+    const plotH = canvas.height - m.top - m.bottom;
+    if (x < m.left || x > m.left + plotW) { tooltip.style.display = 'none'; return; }
+    const rr = -R + 2 * R * (x - m.left) / plotW;
+    const umax = dP * R*R / (4 * mu * L);
+    const u = (dP / (4 * mu * L)) * (R*R - rr*rr);
+    tooltip.style.display = 'block'; tooltip.style.left = (ev.clientX) + 'px'; tooltip.style.top = (rect.top + y) + 'px';
+    tooltip.innerHTML = `<strong>r:</strong> ${rr.toExponential(3)} m<br><strong>u(r):</strong> ${u.toExponential(3)} m/s`;
+  });
+  canvas.addEventListener('mouseleave', () => { const t = document.querySelector('.canvas-tooltip'); if (t) t.style.display = 'none'; });
+}
+
+function attachLab2Interactions() {
+  const canvas = byId('lab2-canvas'); if (!canvas) return;
+  const tooltip = ensureCanvasTooltip();
+  canvas.addEventListener('mousemove', (ev) => {
+    const rect = canvas.getBoundingClientRect(); const x = ev.clientX - rect.left; const y = ev.clientY - rect.top;
+    const mu = parseFloat(byId('lab2-mu').value);
+    const rhoP = parseFloat(byId('lab2-rhop').value);
+    const rhoF = 997;
+    const Dmin = 5, Dmax = 500;
+    const m = { left: 70, right: 40, top: 35, bottom: 45 };
+    const plotW = canvas.width - m.left - m.right;
+    if (x < m.left || x > m.left + plotW) { tooltip.style.display = 'none'; return; }
+    const Dcur = Dmin + (Dmax - Dmin) * (x - m.left) / plotW;
+    const d = Dcur * 1e-6; const r = d/2;
+    const v = 2 * r*r * (rhoP - rhoF) * g / (9 * mu);
+    tooltip.style.display = 'block'; tooltip.style.left = (ev.clientX) + 'px'; tooltip.style.top = (rect.top + y) + 'px';
+    tooltip.innerHTML = `<strong>D:</strong> ${Dcur.toFixed(0)} μm<br><strong>vₜ:</strong> ${v.toExponential(3)} m/s`;
+  });
+  canvas.addEventListener('mouseleave', () => { const t = document.querySelector('.canvas-tooltip'); if (t) t.style.display = 'none'; });
+}
