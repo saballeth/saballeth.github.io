@@ -278,4 +278,72 @@ window.addEventListener('DOMContentLoaded', () => {
   calcStokes();
   updateLabPoiseuille();
   updateLabStokes();
+  enhanceUI();
 });
+
+function createToast() {
+  let t = document.createElement('div');
+  t.className = 'toast';
+  t.id = 'global-toast';
+  document.body.appendChild(t);
+  return t;
+}
+
+function showToast(msg, timeout = 1600) {
+  let t = document.getElementById('global-toast') || createToast();
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._h);
+  t._h = setTimeout(() => t.classList.remove('show'), timeout);
+}
+
+function copyTextToClipboard(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    return navigator.clipboard.writeText(text);
+  }
+  return new Promise((res, rej) => {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      res();
+    } catch (e) { rej(e); }
+  });
+}
+
+function addCopyButtonTo(node) {
+  const btn = document.createElement('button');
+  btn.type = 'button'; btn.className = 'copy-btn'; btn.title = 'Copiar fórmula';
+  btn.innerHTML = 'Copiar';
+  btn.addEventListener('click', (ev) => {
+    ev.stopPropagation();
+    const txt = node.innerText.replace(/\s+/g,' ').trim();
+    copyTextToClipboard(txt).then(() => showToast('Copiado al portapapeles')).catch(() => showToast('No se pudo copiar'));
+  });
+  node.appendChild(btn);
+}
+
+function enhanceUI() {
+  // add copy buttons to equation blocks
+  document.querySelectorAll('.equation, .equation-block').forEach(el => {
+    // avoid adding multiple
+    if (!el.querySelector('.copy-btn')) addCopyButtonTo(el);
+  });
+
+  // smooth scroll for internal nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      if (href.length > 1) {
+        const target = document.querySelector(href);
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); history.replaceState(null, '', href); }
+      }
+    });
+  });
+
+  // small keyboard accessibility for details/summary
+  document.querySelectorAll('details summary').forEach(s => {
+    s.setAttribute('tabindex', '0');
+    s.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); s.parentElement.toggleAttribute('open'); } });
+  });
+}
