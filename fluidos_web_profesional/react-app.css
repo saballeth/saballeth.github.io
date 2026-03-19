@@ -29,6 +29,17 @@ body{
 
 .card{background:rgba(255,255,255,0.02);border-radius:10px;padding:1rem;border:1px solid rgba(255,255,255,0.03);position:relative;z-index:0;box-shadow:0 6px 18px rgba(2,6,23,0.35)}
 
+/* Ensure each block keeps its own vertical space */
+.card, .hero-card, .section {
+	margin-bottom:16px;
+}
+
+/* Grid children should start at the top to avoid overlap when heights differ */
+.grid > *{align-self:start}
+
+/* Clear floats utility for legacy components */
+.clearfix::after{content:"";display:table;clear:both}
+
 .section-title{font-size:1.15rem;margin:0 0 .6rem;color:var(--text)}
 .controls{display:flex;gap:.6rem;align-items:center}
 .btn{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);color:var(--text);padding:.55rem .85rem;border-radius:8px;cursor:pointer}
