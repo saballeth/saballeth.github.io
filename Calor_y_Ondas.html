@@ -2,13 +2,57 @@
 <html lang="es">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>Redirigiendo…</title>
-	<!-- Redirect immediately to the React demo page; change path if hosted under a repo subpath -->
-	<meta http-equiv="refresh" content="0;url=fluidos_web_profesional/react.html">
-	<meta name="robots" content="noindex">
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Calor y Ondas — Información</title>
+	<meta name="description" content="Información sobre temas de calor y ondas; enlace a la versión interactiva con gráficas." />
+	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<p>Redirigiendo a la versión React… Si la redirección no funciona, <a href="fluidos_web_profesional/react.html">haz clic aquí</a>.</p>
+	<header class="container">
+		<h1>Calor y Ondas — Página informativa</h1>
+		<p class="muted">Esta página contiene información y referencias sobre fenómenos de calor y ondas. Para la versión interactiva con gráficas y simulaciones, use el enlace más abajo.</p>
+	</header>
+
+	<main class="container">
+		<section class="card">
+			<h2>Resumen</h2>
+			<p>En esta sección se presenta una visión general de los conceptos teóricos: ecuaciones de conducción de calor, ecuación de onda, condiciones de contorno, soluciones típicas y aplicaciones educativas.</p>
+
+			<h3>Ecuación de calor (unidimensional)</h3>
+			<p>La ecuación de conducción de calor se escribe como:</p>
+			<p class="equation" data-tex="\frac{\partial T}{\partial t} = \alpha \frac{\partial^{2} T}{\partial x^{2}}"></p>
+
+			<h3>Ecuación de onda</h3>
+			<p>La ecuación de onda en una dimensión es:</p>
+			<p class="equation" data-tex="\frac{\partial^{2} u}{\partial t^{2}} = c^{2} \frac{\partial^{2} u}{\partial x^{2}}"></p>
+
+			<p>Si desea experimentar con parámetros, visualizar soluciones y explorar sensibilidad, abra la versión interactiva.</p>
+
+			<p><a class="btn btn-primary" href="fluidos_web_profesional/react.html">Abrir versión interactiva (gráficas)</a></p>
+			<p><a href="index.html">Volver al sitio principal</a></p>
+		</section>
+
+		<section class="card">
+			<h2>Referencias y recursos</h2>
+			<ul>
+				<li>Textos clásicos de conducción de calor y ondas.</li>
+				<li>Enlaces a repositorios y notas de curso.</li>
+			</ul>
+		</section>
+	</main>
+
+	<footer class="footer container">
+		<p class="small-note">Página informativa estática. La versión interactiva (gráficas) está en <a href="fluidos_web_profesional/react.html">fluidos_web_profesional/react.html</a>.</p>
+	</footer>
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', ()=>{
+			if(window.renderMathInElement){
+				renderMathInElement(document.body, {delimiters:[{left:'$',right:'$',display:false},{left:'$$',right:'$$',display:true}]});
+			}
+		});
+	</script>
 </body>
 </html>
