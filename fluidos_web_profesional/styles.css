@@ -141,6 +141,19 @@ details .card, details .vars, details .figure, details .formula-card { margin-to
   box-shadow: 0 8px 20px rgba(0,0,0,0.35); z-index: 9999; transform: translate(-50%, -120%);
 }
 
+/* Announcement box top-left */
+.announcement {
+  position: fixed; top: 14px; left: 14px; z-index: 12000; display:flex; align-items:flex-start; gap:.6rem;
+  background: linear-gradient(180deg, rgba(94,198,255,0.06), rgba(139,125,255,0.04)); border:1px solid rgba(255,255,255,0.06);
+  padding: .55rem .7rem; border-radius: 12px; box-shadow: 0 12px 36px rgba(0,0,0,0.45); color: var(--text); max-width: 320px;
+}
+.announcement-inner strong{display:block;color:#e8f9ff}
+.announcement-msg{font-size:.92rem;color:var(--muted);margin-top:.25rem}
+.announcement-close{background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:1rem;padding:.2rem}
+
+/* Make iframe container responsive */
+.lab-grid iframe{width:100%;height:100%;display:block}
+
 .equation-block { font-size: 1.05rem; }
 .equation { font-size: 1rem; }
 .inline-eq { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:#dff5ff; }

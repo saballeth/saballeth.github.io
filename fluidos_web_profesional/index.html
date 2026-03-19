@@ -12,6 +12,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
 </head>
 <body>
+  <div id="announcement" class="announcement" role="region" aria-label="Anuncios departamento">
+    <div class="announcement-inner">
+      <strong>Departamento de Física — Calor y Ondas</strong>
+      <div class="announcement-msg">Aviso: consulta para el prof. Jean — sesiones y actualizaciones del laboratorio.</div>
+    </div>
+    <button id="announcement-close" class="announcement-close" aria-label="Cerrar anuncio">✕</button>
+  </div>
   <header class="hero" id="inicio">
     <nav class="nav container">
       <div class="brand">
@@ -400,67 +407,14 @@
         </div>
 
         <div class="lab-grid">
-          <details class="card lab-card" open>
-            <summary>
-              <div class="lab-head">
-                <div>
-                  <h3>Laboratorio 1. Flujo de Poiseuille</h3>
-                  <p>Variación de radio, viscosidad, longitud y caída de presión.</p>
-                </div>
-                <div class="mini-badge">Perfil u(r) + caudal Q</div>
-              </div>
-            </summary>
-
-            <div class="slider-grid">
-              <label>Radio R [m] <span id="lab1-r-val">0.010</span>
-                <input id="lab1-r" type="range" min="0.002" max="0.030" step="0.001" value="0.010" oninput="updateLabPoiseuille()">
-              </label>
-              <label>Viscosidad μ [Pa·s] <span id="lab1-mu-val">0.200</span>
-                <input id="lab1-mu" type="range" min="0.010" max="1.000" step="0.010" value="0.200" oninput="updateLabPoiseuille()">
-              </label>
-              <label>Caída de presión ΔP [Pa] <span id="lab1-dp-val">800000</span>
-                <input id="lab1-dp" type="range" min="1000" max="2000000" step="1000" value="800000" oninput="updateLabPoiseuille()">
-              </label>
-              <label>Longitud L [m] <span id="lab1-l-val">50.0</span>
-                <input id="lab1-l" type="range" min="1" max="100" step="1" value="50" oninput="updateLabPoiseuille()">
-              </label>
+          <div class="card">
+            <h3>Laboratorios interactivos (React)</h3>
+            <p class="muted">Las visualizaciones y controles interactivos se han trasladado a la versión React. Use el área interactiva para explorar perfiles y sedimentación con parámetros ajustables.</p>
+            <div style="width:100%;height:520px;border-radius:16px;overflow:hidden;border:1px solid var(--line);margin-top:1rem;">
+              <iframe src="react.html" title="Laboratorios interactivos" style="width:100%;height:100%;border:0;display:block;"></iframe>
             </div>
-
-            <div class="lab-results" id="lab1-results"></div>
-            <canvas id="lab1-canvas" width="760" height="360"></canvas>
-            <p class="caption">Figura 5. Gráfico dinámico propio del perfil parabólico de velocidad u(r) en función del radio.</p>
-          </details>
-
-          <details class="card lab-card" open>
-            <summary>
-              <div class="lab-head">
-                <div>
-                  <h3>Laboratorio 2. Sedimentación de Stokes</h3>
-                  <p>Variación de tamaño de partícula, viscosidad y altura de caída.</p>
-                </div>
-                <div class="mini-badge">v<sub>t</sub> + tiempo + Re<sub>p</sub></div>
-              </div>
-            </summary>
-
-            <div class="slider-grid">
-              <label>Diámetro D [μm] <span id="lab2-d-val">50</span>
-                <input id="lab2-d" type="range" min="5" max="500" step="1" value="50" oninput="updateLabStokes()">
-              </label>
-              <label>Viscosidad μ [Pa·s] <span id="lab2-mu-val">0.0010</span>
-                <input id="lab2-mu" type="range" min="0.0005" max="0.0500" step="0.0005" value="0.0010" oninput="updateLabStokes()">
-              </label>
-              <label>Densidad partícula ρ<sub>p</sub> [kg/m³] <span id="lab2-rhop-val">2650</span>
-                <input id="lab2-rhop" type="range" min="1000" max="8000" step="50" value="2650" oninput="updateLabStokes()">
-              </label>
-              <label>Altura de caída h [m] <span id="lab2-h-val">1.00</span>
-                <input id="lab2-h" type="range" min="0.10" max="5.00" step="0.10" value="1.00" oninput="updateLabStokes()">
-              </label>
-            </div>
-
-            <div class="lab-results" id="lab2-results"></div>
-            <canvas id="lab2-canvas" width="760" height="360"></canvas>
-            <p class="caption">Figura 6. Gráfico dinámico propio de sensibilidad de la velocidad terminal y del tiempo de sedimentación.</p>
-          </details>
+            <p class="caption">Si prefiere, abra la versión interactiva en una nueva ventana: <a href="react.html">Abrir React (interactivo)</a></p>
+          </div>
         </div>
       </div>
     </section>
@@ -515,6 +469,18 @@
 
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+  <script>
+    // Announcement close handler (persist dismissed state)
+    (function(){
+      try{
+        const el = document.getElementById('announcement');
+        const btn = document.getElementById('announcement-close');
+        if(!el || !btn) return;
+        if(localStorage.getItem('announcementDismissed')==='1'){ el.style.display='none'; return; }
+        btn.addEventListener('click', ()=>{ el.style.display='none'; localStorage.setItem('announcementDismissed','1'); });
+      }catch(e){/* ignore */}
+    })();
+  </script>
   <script defer src="script.js"></script>
 </body>
 </html>
