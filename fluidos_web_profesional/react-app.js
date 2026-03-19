@@ -170,7 +170,9 @@ function StokesChart(){
 
 function App(){
   return (
-    <div className="container">
+    <div>
+      <Announcement />
+      <div className="container">
       <header className="header">
         <div className="brand"><div className="brand-mark">μ</div><div><strong>Fluidos — React</strong><div style={{color:'var(--muted)'}}>Demo interactiva modernizada</div></div></div>
         <div className="controls"><a className="btn" href="index.html">Volver al sitio</a></div>
@@ -208,6 +210,21 @@ function App(){
         </aside>
       </div>
 
+      </div>
+    </div>
+  )
+}
+
+function Announcement(){
+  const [open,setOpen] = useState(true);
+  if(!open) return null;
+  return (
+    <div className="announcement" role="region" aria-label="Anuncio departamento">
+      <div className="announcement-inner">
+        <strong>Departamento de Física — Calor y Ondas</strong>
+        <div className="announcement-msg">Aviso: consulta para el prof. Jean — sesiones y actualizaciones del laboratorio.</div>
+      </div>
+      <button className="announcement-close" aria-label="Cerrar anuncio" onClick={()=>setOpen(false)}>✕</button>
     </div>
   )
 }
