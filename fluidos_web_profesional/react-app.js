@@ -77,6 +77,97 @@ function Collapsible({title,children,defaultOpen=true}){
   )
 }
 
+function PoiseuilleChart(){
+  const canvasRef = React.useRef(null);
+  const [R,setR] = useState(0.01); // m
+  const [mu,setMu] = useState(0.2);
+  const [L,setL] = useState(50);
+  const [dP,setdP] = useState(800000);
+  const chartRef = React.useRef(null);
+
+  useEffect(()=>{
+    const Chart = window.Chart;
+    if(!Chart || !canvasRef.current) return;
+    const ctx = canvasRef.current.getContext('2d');
+    const sample = 100;
+    const rs = Array.from({length:sample},(_,i)=>-R + 2*R*i/(sample-1));
+    const coef = dP/(4*mu*L);
+    const data = rs.map(r=>Math.max(0, coef*(R*R - r*r)));
+    if(chartRef.current){
+      chartRef.current.data.labels = rs.map(v=>v.toFixed(4));
+      chartRef.current.data.datasets[0].data = data;
+      chartRef.current.update();
+    } else {
+      chartRef.current = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: rs.map(v=>v.toFixed(4)),
+          datasets: [{ label: 'u(r) [m/s]', data: data, borderColor:'#5ec6ff', tension:0.25, fill:true }]
+        },
+        options: { responsive:true, maintainAspectRatio:false, scales:{ x:{ title:{display:true, text:'r (m)'} }, y:{ title:{display:true, text:'u(r) (m/s)'} } } }
+      });
+    }
+    return ()=>{};
+  },[R,mu,L,dP]);
+
+  return (
+    <div className="card">
+      <h3 className="section-title">Perfil de velocidad — Poiseuille</h3>
+      <div className="form-row"><label>R [m]</label><input className="input" value={R} onChange={e=>setR(parseFloat(e.target.value)||0)} /></div>
+      <div className="form-row"><label>μ [Pa·s]</label><input className="input" value={mu} onChange={e=>setMu(parseFloat(e.target.value)||0)} /></div>
+      <div className="form-row"><label>L [m]</label><input className="input" value={L} onChange={e=>setL(parseFloat(e.target.value)||0)} /></div>
+      <div className="form-row"><label>ΔP [Pa]</label><input className="input" value={dP} onChange={e=>setdP(parseFloat(e.target.value)||0)} /></div>
+      <div style={{height:240}}><canvas ref={canvasRef}></canvas></div>
+    </div>
+  )
+}
+
+function StokesChart(){
+  const canvasRef = React.useRef(null);
+  const [D,setD] = useState(50); // μm for input
+  const [mu,setMu] = useState(0.001);
+  const [rhop,setRhop] = useState(2650);
+  const [rhof,setRhof] = useState(997);
+  const chartRef = React.useRef(null);
+
+  useEffect(()=>{
+    const Chart = window.Chart;
+    if(!Chart || !canvasRef.current) return;
+    const ctx = canvasRef.current.getContext('2d');
+    // sample D in μm
+    const sample = 80;
+    const Ds = Array.from({length:sample},(_,i)=>2 + i*(1000-2)/(sample-1));
+    const g = 9.81;
+    const data = Ds.map(dmu=>{
+      const r = (dmu/1e6)/2;
+      return 2*Math.pow(r,2)*(rhop-rhof)*g/(9*mu);
+    });
+    if(chartRef.current){
+      chartRef.current.data.labels = Ds.map(v=>v.toFixed(0));
+      chartRef.current.data.datasets[0].data = data;
+      chartRef.current.update();
+    } else {
+      chartRef.current = new Chart(ctx, {
+        type:'line',
+        data:{ labels: Ds.map(v=>v.toFixed(0)), datasets:[{ label:'v_t (m/s)', data:data, borderColor:'#8b7dff', tension:0.25, fill:true }]},
+        options:{ responsive:true, maintainAspectRatio:false, scales:{ x:{ title:{display:true,text:'Diámetro (μm)'} }, y:{ title:{display:true,text:'v_t (m/s)'} } } }
+      });
+    }
+    return ()=>{};
+  },[D,mu,rhop,rhof]);
+
+  return (
+    <div className="card">
+      <h3 className="section-title">Velocidad terminal — Stokes</h3>
+      <div className="form-row"><label>D (μm)</label><input className="input" value={D} onChange={e=>setD(parseFloat(e.target.value)||0)} /></div>
+      <div className="form-row"><label>μ [Pa·s]</label><input className="input" value={mu} onChange={e=>setMu(parseFloat(e.target.value)||0)} /></div>
+      <div className="form-row"><label>ρp</label><input className="input" value={rhop} onChange={e=>setRhop(parseFloat(e.target.value)||0)} /></div>
+      <div className="form-row"><label>ρf</label><input className="input" value={rhof} onChange={e=>setRhof(parseFloat(e.target.value)||0)} /></div>
+      <div style={{height:240}}><canvas ref={canvasRef}></canvas></div>
+    </div>
+  )
+}
+
 function App(){
   return (
     <div className="container">
@@ -92,6 +183,9 @@ function App(){
             <p className="muted">Material interactivo reimplementado con React para una UX más moderna.</p>
             <Formula tex="Q = \\frac{\\pi R^{4} \\Delta P}{8 \\mu L}" display={true} />
           </div>
+
+          <PoiseuilleChart />
+          <StokesChart />
 
           <Collapsible title="Sección teórica">
             <h3>Fundamentos</h3>
