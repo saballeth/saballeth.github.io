@@ -286,6 +286,27 @@ window.addEventListener('DOMContentLoaded', () => {
   if (window.katex) observeMathMutations();
 });
 
+// force immediate rendering of all equation elements when KaTeX is ready
+function renderAllMathOnReady() {
+  if (!window.katex) {
+    setTimeout(renderAllMathOnReady, 100);
+    return;
+  }
+  renderEquationsWithKaTeX();
+  // add copy buttons
+  document.querySelectorAll('.equation, .equation-block').forEach(el => {
+    if (!el.querySelector('.copy-btn')) addCopyButtonTo(el);
+  });
+}
+
+(function() {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderAllMathOnReady);
+  } else {
+    setTimeout(renderAllMathOnReady, 50);
+  }
+})();
+
 function createToast() {
   let t = document.createElement('div');
   t.className = 'toast';

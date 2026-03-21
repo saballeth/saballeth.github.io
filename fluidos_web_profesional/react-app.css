@@ -48,16 +48,14 @@ body{
 .form-row{display:flex;gap:.6rem;margin:.6rem 0}
 .input{flex:1;padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:rgba(6,17,27,0.45);color:var(--text)}
 
-.equation{background:transparent;padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.03);margin:.5rem 0;overflow-x:auto}
-.equation .katex{color:var(--text);display:block}
+.equation{background:rgba(255,255,255,0.08);padding:.7rem 1rem;border-radius:8px;border:1px solid rgba(94,198,255,0.2);margin:.5rem 0;overflow-x:auto;line-height:1.35}
+.equation .katex{color:var(--text);display:block;text-align:center;font-size:clamp(1.1rem,2vw,1.6rem)}
 .katex-display{text-align:center}
 
 /* KaTeX visual improvements */
-.katex{font-family: KaTeX_Main, KaTeX_Size1, KaTeX_Size2, KaTeX_Size3, KaTeX_Size4, serif}
-.katex, .katex .mord, .katex .sizing, .katex .katex-html { color:var(--text); }
-.katex-display .katex{font-size:clamp(1.15rem,2.1vw,1.6rem);line-height:1.2}
-.equation .katex .katex-html{display:block;text-align:center}
-.inline-eq{display:inline-block;vertical-align:middle;background:rgba(94,198,255,0.03);padding:.08rem .28rem;border-radius:6px;font-size:clamp(.9rem,1.2vw,1rem);white-space:nowrap;overflow:auto}
+.katex{font-family:KaTeX_Main,KaTeX_Size1,KaTeX_Size2,KaTeX_Size3,KaTeX_Size4,serif;color:var(--text)}
+.katex-display .katex{font-size:clamp(1.15rem,2.4vw,1.7rem);line-height:1.2}
+.inline-eq{display:inline-block;vertical-align:middle;background:rgba(94,198,255,0.05);padding:.1rem .35rem;border-radius:6px;font-size:clamp(.95rem,1.2vw,1.05rem);white-space:nowrap;overflow:auto}
 
 .calculator{display:flex;flex-direction:column;gap:.6rem}
 .result{background:transparent;padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
