@@ -400,7 +400,7 @@ function texifyHTMLFragment(html) {
   let s = html;
   // preserve sub/sup by converting tags first
   s = s.replace(/<sub>(.*?)<\/sub>/g, '_{$1}');
-  s = s.replace(/<sup>(.*?)<\/sup>/g, '^{ $1 }');
+  s = s.replace(/<sup>(.*?)<\/sup>/g, '^{$1}');
 
   // collapse tags to text
   s = s.replace(/<[^>]+>/g, '');
@@ -413,6 +413,8 @@ function texifyHTMLFragment(html) {
   // convert common symbols to TeX
   s = s.replace(/π/g,'\\pi').replace(/Δ/g,'\\Delta');
   s = s.replace(/ρ/g,'\\rho').replace(/μ/g,'\\mu').replace(/ν/g,'\\nu');
+  s = s.replace(/≤/g,'\\leq').replace(/≥/g,'\\geq').replace(/≪/g,'\\ll').replace(/≫/g,'\\gg');
+  s = s.replace(/−/g,'-'); // handle unicode minus
 
   // normalize whitespace
   s = s.replace(/\s+/g, ' ').trim();
@@ -451,9 +453,16 @@ function renderEquationsWithKaTeX() {
       // avoid double-rendering
       if (el.dataset.katexRendered) return;
       let tex = null;
-      if (el.dataset && el.dataset.tex) tex = el.dataset.tex;
-      else tex = texifyHTMLFragment(el.innerHTML || el.textContent || '');
-      const display = el.classList.contains('equation-block');
+      // priority: data-tex attribute
+      if (el.dataset && el.dataset.tex) {
+        tex = el.dataset.tex;
+      } else {
+        // fallback: try to texify html content
+        tex = texifyHTMLFragment(el.innerHTML || el.textContent || '');
+      }
+      // skip empty or trivial content
+      if (!tex || tex.trim().length === 0) return;
+      const display = el.classList.contains('equation-block') || el.classList.contains('equation');
       katex.render(tex, el, { throwOnError: false, displayMode: display });
       el.dataset.katexRendered = '1';
     } catch (e) { /* fail silently */ }
@@ -478,7 +487,8 @@ function observeMathMutations() {
         try {
           if (el.dataset.katexRendered) return;
           let tex = el.dataset && el.dataset.tex ? el.dataset.tex : texifyHTMLFragment(el.innerHTML || el.textContent || '');
-          const display = el.classList.contains('equation-block');
+          if (!tex || tex.trim().length === 0) return;
+          const display = el.classList.contains('equation-block') || el.classList.contains('equation');
           katex.render(tex, el, { throwOnError: false, displayMode: display });
           el.dataset.katexRendered = '1';
           if (!el.querySelector('.copy-btn')) addCopyButtonTo(el);
