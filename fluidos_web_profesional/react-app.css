@@ -48,8 +48,16 @@ body{
 .form-row{display:flex;gap:.6rem;margin:.6rem 0}
 .input{flex:1;padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:rgba(6,17,27,0.45);color:var(--text)}
 
-.equation{background:transparent;padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.03);margin:.5rem 0}
+.equation{background:transparent;padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.03);margin:.5rem 0;overflow-x:auto}
+.equation .katex{color:var(--text);display:block}
 .katex-display{text-align:center}
+
+/* KaTeX visual improvements */
+.katex{font-family: KaTeX_Main, KaTeX_Size1, KaTeX_Size2, KaTeX_Size3, KaTeX_Size4, serif}
+.katex, .katex .mord, .katex .sizing, .katex .katex-html { color:var(--text); }
+.katex-display .katex{font-size:clamp(1.15rem,2.1vw,1.6rem);line-height:1.2}
+.equation .katex .katex-html{display:block;text-align:center}
+.inline-eq{display:inline-block;vertical-align:middle;background:rgba(94,198,255,0.03);padding:.08rem .28rem;border-radius:6px;font-size:clamp(.9rem,1.2vw,1rem);white-space:nowrap;overflow:auto}
 
 .calculator{display:flex;flex-direction:column;gap:.6rem}
 .result{background:transparent;padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
