@@ -173,9 +173,26 @@ details .card, details .vars, details .figure, details .formula-card { margin-to
 .calc-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
 .lab-grid, .ref-grid { grid-template-columns: 1fr; }
 .topic, .calc-card, .lab-card, .refs-card { padding: 1.25rem; }
-.figure { margin: 1rem 0; }
-.figure svg { width: 100%; height: auto; display:block; background: rgba(255,255,255,0.04); border-radius: 18px; border:1px solid var(--line); }
-.figure figcaption, .caption, .small-note { color: var(--muted); font-size: .92rem; margin-top: .6rem; }
+.figure {
+  margin: clamp(1rem, 2vw, 2rem) 0;
+  padding: .65rem;
+  background: rgba(255,255,255,0.02);
+  border-radius: 14px;
+}
+.figure svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: rgba(255,255,255,0.04);
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  margin-bottom: .9rem;
+}
+.figure figcaption, .caption, .small-note {
+  color: var(--muted);
+  font-size: .92rem;
+  margin-top: .9rem;
+}
 .vars {
   margin-top: 1rem; background: rgba(255,255,255,.04); border:1px solid var(--line); border-radius: 18px; padding: .95rem 1rem;
 }

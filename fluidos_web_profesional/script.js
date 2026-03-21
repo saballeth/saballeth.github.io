@@ -281,6 +281,11 @@ window.addEventListener('DOMContentLoaded', () => {
   enhanceUI();
 });
 
+// init mutation observer after load so dynamically inserted math (React or other) is rendered
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.katex) observeMathMutations();
+});
+
 function createToast() {
   let t = document.createElement('div');
   t.className = 'toast';
@@ -422,13 +427,45 @@ function texifyHTMLFragment(html) {
 function renderEquationsWithKaTeX() {
   document.querySelectorAll('.equation, .equation-block, .inline-eq').forEach(el => {
     try {
+      // avoid double-rendering
+      if (el.dataset.katexRendered) return;
       let tex = null;
       if (el.dataset && el.dataset.tex) tex = el.dataset.tex;
       else tex = texifyHTMLFragment(el.innerHTML || el.textContent || '');
       const display = el.classList.contains('equation-block');
       katex.render(tex, el, { throwOnError: false, displayMode: display });
+      el.dataset.katexRendered = '1';
     } catch (e) { /* fail silently */ }
   });
+}
+
+// Observe dynamic additions to the DOM and render any new equation nodes
+function observeMathMutations() {
+  if (!window.MutationObserver) return;
+  const observer = new MutationObserver(mutations => {
+    let added = [];
+    for (const m of mutations) {
+      for (const n of m.addedNodes) {
+        if (!(n instanceof Element)) continue;
+        if (n.matches && (n.matches('.equation') || n.matches('.equation-block') || n.matches('.inline-eq'))) added.push(n);
+        // also search inside subtree
+        added.push(...Array.from(n.querySelectorAll ? n.querySelectorAll('.equation, .equation-block, .inline-eq') : []));
+      }
+    }
+    if (added.length && window.katex) {
+      added.forEach(el => {
+        try {
+          if (el.dataset.katexRendered) return;
+          let tex = el.dataset && el.dataset.tex ? el.dataset.tex : texifyHTMLFragment(el.innerHTML || el.textContent || '');
+          const display = el.classList.contains('equation-block');
+          katex.render(tex, el, { throwOnError: false, displayMode: display });
+          el.dataset.katexRendered = '1';
+          if (!el.querySelector('.copy-btn')) addCopyButtonTo(el);
+        } catch (e) { /* ignore */ }
+      });
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
 }
 
 /* --- Canvas interactivity for labs --- */
